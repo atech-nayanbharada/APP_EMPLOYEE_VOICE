@@ -1,0 +1,693 @@
+{% load custom_filter %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <title>Adani | HR Sampark </title>
+        {% include 'common/header.html' %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+.switch-toggle {
+   float: left;
+   background: #242729;
+}
+.switch-toggle input {
+  position: absolute;
+  opacity: 0;
+}
+.switch-toggle input + label {
+  padding: 7px;
+  float:left;
+  color: #fff;
+  cursor: pointer;
+}
+.switch-toggle input:checked + label {
+  background: #543167;
+}
+
+#blink {
+    font-size: 10px;
+    font-weight: bold;
+    font-family: sans-serif;
+    color: red;
+}
+
+.tri-state-toggle {
+    background: rgba(165,170,174,0.25);
+    box-shadow: inset 0 2px 8px 0 rgba(165,170,174,0.25);
+    border-radius: 24px;
+    display: inline-block;
+    overflow: hidden;
+    display: inline-flex;
+    flex-direction: row;
+  transition: all 500ms ease;
+}
+
+.tri-state-toggle-button {
+    border-radius: 22px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    background-color: transparent;
+    border: 0px solid transparent;
+    margin: 2px;
+    color: #727C8F;
+    cursor: pointer;
+
+/*    -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition:    all 0.5s ease-in-out;
+  -ms-transition:     all 0.5s ease-in-out;
+  -o-transition:      all 0.5s ease-in-out; */
+  transition:         all 0.5s ease;
+}
+
+.tri-state-toggle-button.active {
+    border: 1px solid rgba(207,207,207,0.6);
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.1);
+    color: white!important;
+    font-weight: 500;
+  transition: all .5s ease-in;
+      background-color: #4e78a8;
+}
+
+.tri-state-toggle-button.amber_active {
+    border: 1px solid rgba(207,207,207,0.6);
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.1);
+    color: white!important;
+    font-weight: 500;
+  transition: all .5s ease-in;
+      background-color: #ffbf00;
+}
+
+.tri-state-toggle-button.red_active {
+    border: 1px solid rgba(207,207,207,0.6);
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.1);
+    color: white!important;
+    font-weight: 500;
+  transition: all .5s ease-in;
+      background-color: #FF0000;
+}
+
+.tri-state-toggle-button.green_active {
+    border: 1px solid rgba(207,207,207,0.6);
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.1);
+    color: white!important;
+    font-weight: 500;
+  transition: all .5s ease-in;
+      background-color: #008000;
+}
+.tri-state-toggle-button:focus {
+  outline: none;
+}
+</style>
+<style>
+/* Modal Header */
+.modal-header {
+  padding: 2px 16px;
+  background-color: #4e78a8;
+  color: white;
+  display:inline-block;
+}
+
+/* Modal Body */
+.modal-body {padding: 2px 16px;}
+
+/* Modal Footer */
+.modal-footer {
+  padding: 2px 16px;
+  background-color: #4e78a8;
+  color: white;
+}
+
+/* Modal Content */
+.modal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 0;
+  border: 1px solid #888;
+  width: 80%;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  animation-name: animatetop;
+  animation-duration: 0.4s
+}
+
+/* Add Animation */
+@keyframes animatetop {
+  from {top: -300px; opacity: 0}
+  to {top: 0; opacity: 1}
+}
+</style>
+<!--<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">-->
+
+<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">-->
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>-->
+<!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>-->
+   </head>
+
+   <body id="mybody">
+       {% include 'common/nav_bar.html' %}
+         <div class="pcoded-main-container">
+            <div class="pcoded-content">
+               {% block body %}
+               <div class="pcoded-inner-content">
+                  <div class="main-body">
+                     <div class="page-wrapper">
+                        <div class="page-body">
+                           <br><br><br>
+                           <div class="row">
+                              {% comment %} <h6 class="heads"> Collecting Employee Details</h6> {% endcomment %}
+                              <div class="col-xl-12">
+                                 {% for m in messages  %}
+                                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                       <strong></strong> {{m}}
+                                       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                         <span aria-hidden="true">&times;</span>
+                                       </button>
+                                    </div>
+                                 {% endfor %}
+                                 <div class="card proj-progress-card">
+                                    <div class="card-block" style="border-top: 2px solid #4e78a8;">
+                                       <div class="row">
+                                          <div class="col-xl-10">
+                                             <form action="{% url 'review:employee_review'%}" method="post">
+                                                {% csrf_token %}
+                                                <label for="emp">Employee Id  </label>
+                                                <input type="text" tabindex="1" id="emp" name="emp" placeholder="Emp id" style="width: 600px" required/>
+                                                <input type="Submit" class="mybtn" name="search" value="Fetch Details">
+                                                {% if employee_obj %}
+                                                <a class="custom_button_link" href="{% url 'review:employee_review_detail_view' employee_obj.id %}">Employee History</a>
+                                                {% endif %}
+
+                                                 {% if employee_obj.check_all_category_data_fill_up %}
+                                                 <a id="modal_open_button" style="color: white;" class="custom_button_link">Submit</a>
+                                                 {% endif %}
+
+
+
+                                             </form>
+                                          </div>
+                                          <div class="col-xl-2">
+                                              <div class="row row_label_bold_css" id="content_row1">
+                                                    <div class="col-md-12">
+                                                        {% if employee_obj.get_employee_last_review_date %}
+                                                        <label>Last Engagement Date</label>
+                                                        <h4> {{ employee_obj.get_employee_last_review_date|date:"d.m.Y" }}</h4>
+                                                        {% endif %}
+                                                    </div>
+                                              </div>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                            {% if employee_obj %}
+                           <h6 class="heads"> Employee Details</h6>
+                           <div class="col-xl-12">
+                                 <div class="card proj-progress-card">
+                                    <div class="card-block" style="border-top: 2px solid #3498db;">
+                                       <div class="row row_label_bold_css" id="content_row1">
+                                          <div class="col-md-2">
+                                             <label> Employee ID </label>
+                                                {% if employee_obj.EmployeeNumber %}
+                                                <h4> {{ employee_obj.EmployeeNumber }}</h4>
+                                                {% else %}
+                                                <h5>XXXXXXXXXX</h5>
+                                                {% endif %}
+                                          </div>
+                                          <div class="col-md-2">
+                                             <label>Employee Name</label>
+                                                {% if employee_obj.EmployeeName %}
+                                                <h5> {{ employee_obj.EmployeeName }}</h5>
+                                                {% else %}
+                                                <h5>XXXXXXXXXX</h5>
+                                                {% endif %}
+                                          </div>
+                                          <div class="col-md-2">
+                                             <label>Grade</label>
+                                                {% if employee_obj.Position %}
+                                                <h5> {{ employee_obj.Position }}</h5>
+                                                {% else %}
+                                                <h5>XXXXXXXXXX</h5>
+                                                {% endif %}
+                                          </div>
+                                          <div class="col-md-2">
+                                             <label>DOB</label>
+                                             {% if employee_obj.DateOfBirth %}
+                                             <h5>{{employee_obj.DateOfBirth}}</h5>
+                                             {% else %}
+                                             <h5>XXXXXXXXXX</h5>
+                                             {% endif %}
+                                          </div>
+                                          <div class="col-md-2">
+                                             <label>Department </label>
+                                             {% if employee_obj.DepartmentReportingName %}
+                                             <h5> {{ employee_obj.DepartmentReportingName }}</h5>
+                                             {% else %}
+                                             <h5>XXXXXXXXXX</h5>
+                                             {% endif %}
+                                          </div>
+                                          <div class="col-md-2">
+                                             <label>BusinessUnit</label>
+                                                {% if employee_obj.BusinessUnit %}
+                                                <h5> {{ employee_obj.BusinessUnit }}</h5>
+                                                {% else %}
+                                                <h5>XXXXXXXXXX</h5>
+                                                {% endif %}
+                                          </div>
+                                       </div>
+                                       <div class="row row_label_bold_css" id="content_row">
+                                          <div class="col-md-2">
+                                             <label>DOJ </label>
+                                                {% if employee_obj.DateOfJoin %}
+                                                   {% if employee_obj.check_employee_is_new_joiner %}
+                                                      <h5> {{ employee_obj.DateOfJoin }} <div id="blink">New Joiner</div> </h5>
+                                                   {% else %}
+                                                       <h5> {{ employee_obj.DateOfJoin }} </h5>
+                                                   {% endif %}
+                                             {% else %}
+                                                <h5>XXXXXXXXXX</h5>
+                                                {% endif %}
+                                          </div>
+                                          <div class="col-md-2">
+                                             <label>Group DOJ</label>
+                                                {% if employee_obj.GroupOfDateOfJoin %}
+                                                <h5> {{ employee_obj.GroupOfDateOfJoin }}</h5>
+                                                {% else %}
+                                                <h5>XXXXXXXXXX</h5>
+                                                {% endif %}
+                                          </div>
+                                          <div class="col-md-2">
+                                             <label>Location</label>
+                                                {% if employee_obj.Location %}
+                                                <h5> {{employee_obj.Location}}</h5>
+                                                {% else %}
+                                                <h5>XXXXXXXXXX</h5>
+                                                {% endif %}
+                                          </div>
+                                          <div class="col-md-2">
+                                                <label>Manager Id</label>
+                                                   {% if employee_obj.ReportingMangerID %}
+                                                   <h5> {{ employee_obj.ReportingMangerID }}</h5>
+                                                   {% else %}
+                                                   <h5>XXXXXXXXXX</h5>
+                                                   {% endif %}
+                                          </div>
+                                          <div class="col-md-2">
+                                                <label>Manager Name</label>
+                                                   {% if employee_obj.ReportingMangerFullName %}
+                                                   <h5> {{ employee_obj.ReportingMangerFullName }}</h5>
+
+                                                   {% else %}
+                                                   <h5>XXXXXXXXXX</h5>
+                                                   {% endif %}
+                                          </div>
+                                          <div class="col-md-2">
+                                                <label>Location </label>
+                                                {% if employee_obj.Location %}
+                                                <h5> {{ employee_obj.Location }}</h5>
+                                                {% else %}
+                                                <h5>XXXXXXXXXX</h5>
+                                                {% endif %}
+                                          </div>
+                                       </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+                           {% if employee_obj.get_employee_review_draft_exists %}
+                           <h6 class="heads"></h6>
+                           <div class="col-xl-12">
+                                 <div class="card proj-progress-card">
+                                    <div class="card-block" style="border-top: 2px solid #3498db;">
+                                        {% if employee_obj.get_employee_progress == 100 %}
+                                            <div class="w3-light-grey w3-round-xlarge">
+                                                <div class="w3-container w3-blue w3-round-xlarge"
+                                                     style="width:{{ employee_obj.get_employee_progress }}%;background-color: #008000a6!important;">
+                                                    {{ employee_obj.get_employee_progress }}%
+                                                </div>
+                                            </div>
+                                        {% else %}
+                                        <div class="w3-light-grey w3-round-xlarge">
+                                            <div class="w3-container w3-blue w3-round-xlarge"
+                                                 style="width:{{ employee_obj.get_employee_progress }}%;background-color: #4d77a8!important;">
+                                                {{ employee_obj.get_employee_progress }}%
+                                            </div>
+                                        </div>
+                                        {% endif %}
+                                    </div>
+                                 </div>
+                           </div>
+                           {% endif %}
+
+
+                     {% if employee_obj %}
+                        <h6 class="heads"> Add Query Details </h6>
+                           <div class="col-xl-12" >
+                              <div class="card proj-progress-card">
+                                 <div class="card-block"  style="border-top: 2px solid #4e78a8;">
+                                    <div class="row">
+                                       <div class="col-xl-12 col-md-12">
+                                          <div class="tabs">
+                                             {% for category in all_category %}
+                                                <div class="tab">
+                                                   <input type="radio" name="css-tabs" id="tab-1-{{ category.id }}" {% if forloop.counter == 1 %} checked {% endif %} class="tab-switch" onclick="last_review_category_open({{ category.id }})">
+                                                   <label for="tab-1-{{ category.id }}" class="tab-label">{{ category.CategoryName }}&nbsp;&nbsp;{% if employee_obj|check_category_data_fill:category %} <i class="far fa-check-circle"></i> {% endif %}</label>
+                                                      <div class="tab-content">
+                                                           <form method="post" action="{% url 'review:employee_review_submit' %}">
+                                                               {% csrf_token %}
+                                                               <div class="questions">
+                                                                     <input type="hidden" name="employee_id" value="{{ employee_obj.id }}">
+                                                                     <input type="hidden" name="category_id" value="{{ category.id }}">
+                                                                     <table class="que_tab">
+                                                                        {% for question_template_obj in category.category_question.all %}
+                                                                         {% with employee_obj|check_question_exists:question_template_obj as check_data %}
+                                                                           <tr>
+                                                                               <td>
+                                                                                   {% if check_data.0 == "question_exists" and check_data.3 %}
+                                                                                   <i class="fa fa-cloud-upload fa-lg" aria-hidden="true"></i>
+                                                                                   {% endif %}
+                                                                               </td>
+                                                                                <td>{{ question_template_obj.Question }}</td>
+                                                                                 <td>
+
+                                                                                     {% if check_data.0 == "question_exists" %}
+                                                                                        {% if question_template_obj.Question == "EWS Status (To be filled by HR – Red/ Amber/ Green)" %}
+                                                                                            {% with employee_obj|review_ews_status as ews_color_status %}
+                                                                                             <input type="hidden" name="category_question_ans_checkbox_{{ question_template_obj.id }}" id="category_question_ans_checkbox_{{ question_template_obj.id }}" value="{{ check_data.1 }}">
+                                                                                             <div class="tri-state-toggle">
+                                                                                                 <a class="tri-state-toggle-button {% if check_data.1 == 'Red' %}red_active{% endif %}"  data-value="Red" data-id="category_question_ans_checkbox_{{ question_template_obj.id }}" data-name="toggle-button_{{ question_template_obj.id }}" id="toggle-button_{{ question_template_obj.id }}_1">Red</a>
+                                                                                                 <a class="tri-state-toggle-button {% if check_data.1 == 'Amber' %}amber_active{% endif %}"  data-value="Amber" data-id="category_question_ans_checkbox_{{ question_template_obj.id }}" data-name="toggle-button_{{ question_template_obj.id }}" id="toggle-button_{{ question_template_obj.id }}_2">Amber</a>
+                                                                                                 <a class="tri-state-toggle-button {% if check_data.1 == 'Green' %}green_active{% endif %}" data-value="Green" data-id="category_question_ans_checkbox_{{ question_template_obj.id }}" data-name="toggle-button_{{ question_template_obj.id }}" id="toggle-button_{{ question_template_obj.id }}_3">Green</a>
+                                                                                             </div>
+                                                                                            {% endwith %}
+                                                                                        {% else %}
+                                                                                             <input type="hidden" name="category_question_ans_checkbox_{{ question_template_obj.id }}" id="category_question_ans_checkbox_{{ question_template_obj.id }}" value="{{ check_data.1 }}">
+                                                                                             <div class="tri-state-toggle">
+                                                                                                 <a class="tri-state-toggle-button {% if check_data.1 == 'Yes' %}active{% endif %}"  data-value="Yes" data-id="category_question_ans_checkbox_{{ question_template_obj.id }}" data-name="toggle-button_{{ question_template_obj.id }}" id="toggle-button_{{ question_template_obj.id }}_1">Yes</a>
+                                                                                                 <a class="tri-state-toggle-button {% if check_data.1 == 'N/A' %}active{% endif %}"  data-value="N/A" data-id="category_question_ans_checkbox_{{ question_template_obj.id }}" data-name="toggle-button_{{ question_template_obj.id }}" id="toggle-button_{{ question_template_obj.id }}_2">N/A</a>
+                                                                                                 <a class="tri-state-toggle-button {% if check_data.1 == 'No' %}active{% endif %}" data-value="No" data-id="category_question_ans_checkbox_{{ question_template_obj.id }}" data-name="toggle-button_{{ question_template_obj.id }}" id="toggle-button_{{ question_template_obj.id }}_3">No</a>
+                                                                                             </div>
+                                                                                         {% endif %}
+                                                                                     {% else %}
+<!--                                                                                         <input type="hidden" name="category_question_ans_checkbox_{{ question_template_obj.id }}" id="category_question_ans_checkbox_{{ question_template_obj.id }}" value="N/A">-->
+                                                                                         {% if question_template_obj.Question == "New Joinee?" %}
+                                                                                            {% if employee_obj.DateOfJoin %}
+                                                                                               {% if employee_obj.check_employee_is_new_joiner %}
+                                                                                                 <input type="hidden" name="category_question_ans_checkbox_{{ question_template_obj.id }}" id="category_question_ans_checkbox_{{ question_template_obj.id }}" value="Yes">
+                                                                                                 <div class="tri-state-toggle">
+                                                                                                     <a class="tri-state-toggle-button active"  data-value="Yes" data-id="category_question_ans_checkbox_{{ question_template_obj.id }}" data-name="toggle-button_{{ question_template_obj.id }}" id="toggle-button_{{ question_template_obj.id }}_1">Yes</a>
+                                                                                                     <a class="tri-state-toggle-button"  data-value="N/A" data-id="category_question_ans_checkbox_{{ question_template_obj.id }}" data-name="toggle-button_{{ question_template_obj.id }}" id="toggle-button_{{ question_template_obj.id }}_2">N/A</a>
+                                                                                                     <a class="tri-state-toggle-button" data-value="No" data-id="category_question_ans_checkbox_{{ question_template_obj.id }}" data-name="toggle-button_{{ question_template_obj.id }}" id="toggle-button_{{ question_template_obj.id }}_3">No</a>
+                                                                                                 </div>
+                                                                                               {% else %}
+                                                                                                <input type="hidden" name="category_question_ans_checkbox_{{ question_template_obj.id }}" id="category_question_ans_checkbox_{{ question_template_obj.id }}" value="No">
+                                                                                                 <div class="tri-state-toggle">
+                                                                                                     <a class="tri-state-toggle-button"  data-value="Yes" data-id="category_question_ans_checkbox_{{ question_template_obj.id }}" data-name="toggle-button_{{ question_template_obj.id }}" id="toggle-button_{{ question_template_obj.id }}_1">Yes</a>
+                                                                                                     <a class="tri-state-toggle-button"  data-value="N/A" data-id="category_question_ans_checkbox_{{ question_template_obj.id }}" data-name="toggle-button_{{ question_template_obj.id }}" id="toggle-button_{{ question_template_obj.id }}_2">N/A</a>
+                                                                                                     <a class="tri-state-toggle-button active" data-value="No" data-id="category_question_ans_checkbox_{{ question_template_obj.id }}" data-name="toggle-button_{{ question_template_obj.id }}" id="toggle-button_{{ question_template_obj.id }}_3">No</a>
+                                                                                                 </div>
+                                                                                               {% endif %}
+                                                                                            {% else %}
+                                                                                                <input type="hidden" name="category_question_ans_checkbox_{{ question_template_obj.id }}" id="category_question_ans_checkbox_{{ question_template_obj.id }}" value="N/A">
+                                                                                                <div class="tri-state-toggle">
+                                                                                                     <a class="tri-state-toggle-button"  data-value="Yes" data-id="category_question_ans_checkbox_{{ question_template_obj.id }}" data-name="toggle-button_{{ question_template_obj.id }}" id="toggle-button_{{ question_template_obj.id }}_1">Yes</a>
+                                                                                                     <a class="tri-state-toggle-button active"  data-value="N/A" data-id="category_question_ans_checkbox_{{ question_template_obj.id }}" data-name="toggle-button_{{ question_template_obj.id }}" id="toggle-button_{{ question_template_obj.id }}_2">N/A</a>
+                                                                                                     <a class="tri-state-toggle-button" data-value="No" data-id="category_question_ans_checkbox_{{ question_template_obj.id }}" data-name="toggle-button_{{ question_template_obj.id }}" id="toggle-button_{{ question_template_obj.id }}_3">No</a>
+                                                                                                 </div>
+                                                                                            {% endif %}
+                                                                                         {% elif question_template_obj.Question == "EWS Status (To be filled by HR – Red/ Amber/ Green)" %}
+                                                                                             {% with employee_obj|review_ews_status as ews_color_status %}
+
+                                                                                                 <input type="hidden" name="category_question_ans_checkbox_{{ question_template_obj.id }}" id="category_question_ans_checkbox_{{ question_template_obj.id }}" value="{{ ews_color_status }}">
+                                                                                                 <div class="tri-state-toggle">
+                                                                                                     <a class="tri-state-toggle-button {% if ews_color_status == 'Red' %}red_active{% endif %}" data-value="Red" data-id="category_question_ans_checkbox_{{ question_template_obj.id }}" data-name="toggle-button_{{ question_template_obj.id }}" id="toggle-button_{{ question_template_obj.id }}_1">Red</a>
+                                                                                                     <a class="tri-state-toggle-button {% if ews_color_status == 'Amber' %}amber_active{% endif %}" data-value="Amber" data-id="category_question_ans_checkbox_{{ question_template_obj.id }}" data-name="toggle-button_{{ question_template_obj.id }}" id="toggle-button_{{ question_template_obj.id }}_2">Amber</a>
+                                                                                                     <a class="tri-state-toggle-button {% if ews_color_status == 'Green' %}green_active{% endif %}" data-value="Green" data-id="category_question_ans_checkbox_{{ question_template_obj.id }}" data-name="toggle-button_{{ question_template_obj.id }}" id="toggle-button_{{ question_template_obj.id }}_3">Green</a>
+                                                                                                 </div>
+                                                                                             {% endwith %}
+                                                                                         {% else %}
+                                                                                            <input type="hidden" name="category_question_ans_checkbox_{{ question_template_obj.id }}" id="category_question_ans_checkbox_{{ question_template_obj.id }}" value="N/A">
+                                                                                            <div class="tri-state-toggle">
+                                                                                                 <a class="tri-state-toggle-button"  data-value="Yes" data-id="category_question_ans_checkbox_{{ question_template_obj.id }}" data-name="toggle-button_{{ question_template_obj.id }}" id="toggle-button_{{ question_template_obj.id }}_1">Yes</a>
+                                                                                                 <a class="tri-state-toggle-button active"  data-value="N/A" data-id="category_question_ans_checkbox_{{ question_template_obj.id }}" data-name="toggle-button_{{ question_template_obj.id }}" id="toggle-button_{{ question_template_obj.id }}_2">N/A</a>
+                                                                                                 <a class="tri-state-toggle-button" data-value="No" data-id="category_question_ans_checkbox_{{ question_template_obj.id }}" data-name="toggle-button_{{ question_template_obj.id }}" id="toggle-button_{{ question_template_obj.id }}_3">No</a>
+                                                                                            </div>
+                                                                                         {% endif %}
+                                                                                     {% endif %}
+                                                                                 </td>
+                                                                                 <td>
+                                                                                    <input type="text" required name="remark_{{ question_template_obj.id }}" class="form-control" placeholder="Remarks" {% if check_data.0 == "question_exists" and check_data.2 %} value="{{ check_data.2 }}"{% endif %}>
+<!--                                                                                    <textarea name="remark_{{ question_template_obj.id }}" class="form-control" placeholder="Remarks">{% if check_data.0 == "question_exists" and check_data.2 %}{{ check_data.2 }}{% endif %}</textarea>-->
+                                                                                 </td>
+                                                                              </tr>
+                                                                         {% endwith %}
+                                                                        {% endfor %}
+                                                                        <tr>
+                                                                           <td colspan="4"><textarea required name="comment-{{ category.CategoryName }}" class="form-control" placeholder="Additional Comments">{% if employee_obj|employee_review_comment:category.CategoryName %}{{employee_obj|employee_review_comment:category.CategoryName}}{% else %}{% endif %}</textarea></td>
+                                                                        </tr>
+                                                                  </table>
+                                                               </div>
+                                                               <br>
+                                                               <center>
+                                                                  <button type="submit"  class="mybtn sub_btn">
+                                                                     Save As Draft
+                                                                  </button>
+                                                               </center>
+                                                           </form>
+                                                      </div>
+                                                </div>
+                                             {% endfor %}
+                                          </div>
+                                       </div>
+                                        {% if employee_obj.get_employee_review_draft_exists %}
+                                            <div class="col-xl-12 col-md-12">
+                                                <center>
+                                                    <!-- {% url 'review:employee_final_submit' %} -->
+<!--                                                     <form action="#" method="post">-->
+<!--                                                        {% csrf_token %}-->
+<!--                                                        <input type="hidden" tabindex="1" id="employee_id" name="employee_id"  value="{{ employee_obj.id }}" style="width: 600px" required/>-->
+<!--                                                    <button id="modal_open_button" class="custom_button_link" name="search" style="width: 300px">Submit</button>-->
+<!--                                                     </form>-->
+                                                </center>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+
+                         {% if employee_obj.check_employee_last_review_exists %}
+                         <h6 class="heads"> Last Engagement Date: {% if employee_obj.get_employee_last_review_date %}
+                             {{ employee_obj.get_employee_last_review_date|date:"d.m.Y" }}
+                             {% endif %}</h6>
+                            <div class="col-xl-12" >
+                                  <div class="card proj-progress-card">
+                                     <div class="card-block"  style="border-top: 2px solid #9b59b6;">
+                                        <div class="row">
+                                           <div class="col-xl-12 col-md-12">
+                                              <div class="tabs">
+                                                 {% for category in all_category %}
+                                                    <div class="tab">
+                                                       <input type="radio" name="css-tabsd" id="tab-2-{{ category.id }}" {% if forloop.counter == 1 %} checked {% endif %} class="tab-switch">
+                                                       <label for="tab-2-{{ category.id }}" class="tab-label">{{ category.CategoryName }}</label>
+                                                          <div class="tab-content">
+                                                              <div class="questions">
+                                                                     <table class="custom_que_tab">
+                                                                         {% for question_template_obj in category.category_question.all %}
+                                                                                {% with employee_obj|employee_last_review_question_ans:question_template_obj as emp_last_data_check %}
+                                                                                    <tr>
+                                                                                        <td>{% if emp_last_data_check.0 == "question_exists" %} {{ question_template_obj.Question }} {% endif %}</td>
+                                                                                        <td>{% if emp_last_data_check.0 == "question_exists" %} {{ emp_last_data_check.1 }} {% endif %}</td>
+                                                                                         <td>{% if emp_last_data_check.0 == "question_exists" %} {{ emp_last_data_check.2 }} {% endif %}</td>
+                                                                                    </tr>
+                                                                                {% endwith %}
+                                                                         {% endfor %}
+                                                                         {% if employee_obj|employee_last_review_comment:category.CategoryName %}<tr><td> Additional Comments </td><td colspan="2">{{employee_obj|employee_last_review_comment:category.CategoryName}}</td></tr>{% else %}{% endif %}
+                                                                     </table>
+                                                              </div>
+                                                          </div>
+
+                                                    </div>
+                                                 {% endfor %}
+
+                                              </div>
+                                           </div>
+
+                                        </div>
+                                     </div>
+                                  </div>
+                               </div>
+
+                         {% endif %}
+                     {% endif %}
+                     {% comment %} <center>
+                        <button type="submit" class="mybtn">
+                           Complete Review
+                        </button>
+                     </center> {% endcomment %}
+                     <br><br>
+                  </div>
+
+               </div>
+            </div>
+         </div>
+
+         <div class="footer">
+            <span> Powered By A-Tech </span>
+         </div>
+             <!-- Trigger/Open The Modal -->
+<!--<button id="myBtn">Open Modal</button>-->
+
+<!-- The Modal -->
+ <div id="myModal" class="modal">
+     <!-- Modal content -->
+     <div class="modal-dialog modal-sm" style="max-width: 400px;">
+         <div class="modal-content">
+             <div class="modal-header">
+                 <span class="close">&times;</span>
+                 <h2 style="font-size: 22px;">Final Submit</h2>
+             </div>
+             <div class="modal-body">
+                 <div class="row">
+                     <div class="col-md-12">
+                         <form action="{% url 'review:employee_final_submit' %}" method="post">
+                             {% csrf_token %}
+                             <p>Are you sure you want to submit this data?</p>
+                              <input type="hidden" name="employee_id" value="{{ employee_obj.id }}">
+                             <input type="Submit" class="mybtn" name="search" value="Yes">
+                             <a class="custom_button_link" style="color: white;" onclick="modal_close_code();">No</a>
+                         </form>
+                     </div>
+                </div>
+            </div>
+         </div>
+     </div>
+ </div>
+            </div>
+         </div>
+
+         {% endblock body %}
+
+        {% include 'common/footer.html' %}
+      {% block script %}
+ <script>
+function check_box_value_add(ans_value, text_box_id){
+    console.log("function call");
+    console.log(ans_value);
+    console.log(text_box_id);
+    document.getElementById(text_box_id).value=ans_value;
+}
+ </script>
+<script type="text/javascript">
+    var blink =
+        document.getElementById('blink');
+    if (blink) {
+    setInterval(function () {
+        blink.style.opacity =
+        (blink.style.opacity == 0 ? 1 : 0);
+    }, 1000);
+    }
+</script>
+
+<script>
+$(document).ready(function(){
+  $("#toggle-button1").addClass("active");
+  $(".tri-state-toggle-button").click(function(){
+
+    var id = $(this).attr('id');
+    var data_id = $(this).attr("data-id");
+    var data_value = $(this).attr("data-value");
+    var data_name = $(this).attr("data-name");
+
+
+    $("#" + id).addClass("active");
+
+    if (data_value == "Yes"){
+        $("#"+ data_name + "_2").removeClass("active");
+        $("#"+ data_name +"_3").removeClass("active");
+    }
+
+    if (data_value == "N/A"){
+        $("#"+ data_name + "_1").removeClass("active");
+        $("#"+ data_name +"_3").removeClass("active");
+    }
+
+    if (data_value == "No"){
+        $("#"+ data_name + "_1").removeClass("active");
+        $("#"+ data_name +"_2").removeClass("active");
+    }
+
+    if (data_value == "Red"){
+        $("#" + id).addClass("red_active");
+        $("#" + id).removeClass("active");
+        $("#"+ data_name + "_2").removeClass("amber_active");
+        $("#"+ data_name +"_3").removeClass("green_active");
+    }
+
+    if (data_value == "Amber"){
+        $("#" + id).addClass("amber_active");
+        $("#" + id).removeClass("active");
+        $("#"+ data_name + "_1").removeClass("red_active");
+        $("#"+ data_name +"_3").removeClass("green_active");
+    }
+
+    if (data_value == "Green"){
+        $("#" + id).addClass("green_active");
+        $("#" + id).removeClass("active");
+        $("#"+ data_name + "_1").removeClass("red_active");
+        $("#"+ data_name +"_2").removeClass("amber_active");
+    }
+
+    document.getElementById(data_id).value=data_value;
+
+  });
+   setTimeout(function() {
+        $(".alert").alert('close');
+    }, 2000);
+});
+</script>
+<script>
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("modal_open_button");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on the button, open the modal
+if (btn){
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+function modal_close_code(){
+    console.log("function call");
+    modal.style.display = "none";
+
+}
+</script>
+<script>
+function last_review_category_open(category_id){
+$("#tab-2-"+category_id).click();
+}
+</script>
+	   {% endblock script %}
+   </body>
+</html>

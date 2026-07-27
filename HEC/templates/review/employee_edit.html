@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Adani | Contact Center App </title>
+  {% include 'common/header.html' %}
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+</head>
+
+<body id="mybody">
+  {% include 'common/nav_bar.html' %}
+  <div class="pcoded-main-container">
+        <div class="pcoded-content">
+           {% block body %}
+           <div class="pcoded-inner-content">
+              <div class="main-body">
+                 <div class="page-wrapper">
+                    <div class="page-body">
+                       <br><br><br>
+                       <div clas="row">
+                         {% comment %} <h6 class="heads"> Collecting Employee Details</h6> {% endcomment %}
+                       </div>
+                       <h6 class="heads"> Employee Edit</h6>
+                       <div class="col-xl-12">
+                       {% for m in messages %}
+                       <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                           <strong></strong> {{m}}
+                           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                               <span aria-hidden="true">&times;</span>
+                           </button>
+                       </div>
+                       {% endfor %}
+                         <div class="card proj-progress-card">
+                            <div class="card-block" style="border-top: 2px solid #3498db;">
+                                <form method="post">
+                                    {% csrf_token %}
+                                    <div class="row row_label_bold_css" >
+                                        <div class="col-md-3">
+                                           <div class="form-group">
+                                               <label for="employee_number">Employee Number </label>
+                                                <input type="text" tabindex="1" id="employee_number" name="employee_number"
+                                                       placeholder="Employee Number"
+                                                       value="{{ employee_obj.EmployeeNumber}}"
+                                                       readonly
+                                                       class="form-control"
+                                                       required/>
+                                           </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                           <div class="form-group">
+                                               <label for="employee_name">Employee Name</label>
+                                                <input type="text" tabindex="1" id="employee_name" name="employee_name"
+                                                       placeholder="Employee name"
+                                                       value="{{ employee_obj.EmployeeName}}"
+                                                       class="form-control"
+                                                       required/>
+                                           </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                           <div class="form-group">
+                                               <label for="position_code">Position Code</label>
+                                                <input type="text" tabindex="1" id="position_code"
+                                                       name="position_code"
+                                                       placeholder="Position code"
+                                                       value="{{ employee_obj.PositionCode}}"
+                                                       class="form-control"
+                                                       required/>
+                                           </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                           <div class="form-group">
+                                               <label for="employee_number">Position </label>
+                                                <input type="text" tabindex="1" id="position"
+                                                       name="position"
+                                                       placeholder="Position"
+                                                       value="{{ employee_obj.Position }}"
+                                                       class="form-control"
+                                                       required/>
+                                           </div>
+                                        </div>
+                                    </div>
+                                    <div class="row row_label_bold_css" >
+                                        <div class="col-md-3">
+                                           <div class="form-group">
+                                               <label for="grade_code">GradeCode</label>
+                                                <input type="text" tabindex="1" id="grade_code"
+                                                       name="grade_code"
+                                                       placeholder="Grade Code"
+                                                       value="{{ employee_obj.GradeCode}}"
+                                                       class="form-control"
+                                                       required/>
+                                           </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                           <div class="form-group">
+                                               <label for="employee_status">Employee Status</label>
+                                                <input type="text" tabindex="1" id="employee_status"
+                                                       name="employee_status"
+                                                       placeholder="Employee Status"
+                                                       value="{{ employee_obj.EmployeeStatus}}"
+                                                       class="form-control"
+                                                       required/>
+                                           </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                           <div class="form-group">
+                                               <label for="employee_type">Employee Type</label>
+                                                <input type="text" tabindex="1" id="employee_type"
+                                                       name="employee_type"
+                                                       placeholder="Employee Type"
+                                                       value="{{ employee_obj.EmployeeType}}"
+                                                       class="form-control"
+                                                       required/>
+                                           </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                           <div class="form-group">
+                                               <label for="business_unit">Business Unit</label>
+                                                <input type="text" tabindex="1" id="business_unit"
+                                                       name="business_unit"
+                                                       placeholder="Business Unit"
+                                                       value="{{ employee_obj.BusinessUnit}}"
+                                                       class="form-control"
+                                                       required/>
+                                           </div>
+                                        </div>
+                                    </div>
+                                    <div class="row row_label_bold_css" >
+                                        <div class="col-md-3">
+                                           <div class="form-group">
+                                               <label for="legal_entity">LegalEntity</label>
+                                                <input type="text" tabindex="1" id="legal_entity"
+                                                       name="legal_entity"
+                                                       placeholder="Legal Entity"
+                                                       value="{{ employee_obj.LegalEntity}}"
+                                                       class="form-control"
+                                                       required/>
+                                           </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                           <div class="form-group">
+                                               <label for="dept_oracle_string">Department of Oracle String</label>
+                                                <input type="text" tabindex="1" id="dept_oracle_string"
+                                                       name="dept_oracle_string"
+                                                       placeholder="Department of Oracle String"
+                                                       value="{{ employee_obj.DepartmentOfOracleString}}"
+                                                       class="form-control"
+                                                       required/>
+                                           </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                           <div class="form-group">
+                                               <label for="department_reporting_name">Department Reporting Name</label>
+                                                <input type="text" tabindex="1" id="department_reporting_name"
+                                                       name="department_reporting_name"
+                                                       placeholder="Employee Type"
+                                                       value="{{ employee_obj.DepartmentReportingName }}"
+                                                       class="form-control"
+                                                       required/>
+                                           </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                           <div class="form-group">
+                                               <label for="location">Location</label>
+                                                <input type="text" tabindex="1" id="location"
+                                                       name="location"
+                                                       placeholder="Location"
+                                                       value="{{ employee_obj.Location }}"
+                                                       class="form-control"
+                                                       required/>
+                                           </div>
+                                        </div>
+                                    </div>
+                                    <div class="row row_label_bold_css" >
+                                        <div class="col-md-3">
+                                           <div class="form-group">
+                                               <label for="date_of_birth">DateOfBirth</label>
+                                                <input type="date" tabindex="1" id="date_of_birth"
+                                                       name="date_of_birth"
+                                                       placeholder="dd.mm.yyyy"
+                                                       value="{{ employee_obj.DateOfBirth|date:'Y-m-d'}}"
+                                                       class="form-control"
+                                                       required/>
+                                           </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                           <div class="form-group">
+                                               <label for="age">Age</label>
+                                                <input type="text" tabindex="1" id="age"
+                                                       name="age"
+                                                       placeholder="Age"
+                                                       value="{{ employee_obj.Age }}"
+                                                       class="form-control"
+                                                       required/>
+                                           </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                           <div class="form-group">
+                                               <label for="gender">Gender</label>
+                                                <input type="text" tabindex="1" id="gender"
+                                                       name="gender"
+                                                       placeholder="Gender"
+                                                       value="{{ employee_obj.Gender }}"
+                                                       class="form-control"
+                                                       required/>
+                                           </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                           <div class="form-group">
+                                               <label for="marital_status">Marital Status</label>
+                                                <input type="text" tabindex="1" id="marital_status"
+                                                       name="marital_status"
+                                                       placeholder="Marital Status"
+                                                       value="{{ employee_obj.MaritalStatus }}"
+                                                       class="form-control"
+                                                       required/>
+                                           </div>
+                                        </div>
+                                    </div>
+                                    <div class="row row_label_bold_css" >
+                                        <div class="col-md-3">
+                                           <div class="form-group">
+                                               <label for="date_of_join">DateOfJoin</label>
+                                                <input type="date" tabindex="1" id="date_of_join"
+                                                       name="date_of_join"
+                                                       placeholder="dd.mm.yyyy"
+                                                       value="{{ employee_obj.DateOfJoin|date:'Y-m-d' }}"
+                                                       class="form-control"
+                                                       required/>
+                                           </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                           <div class="form-group">
+                                               <label for="group_date_of_join">GroupOfDateOfJoin</label>
+                                                <input type="date" tabindex="1" id="group_date_of_join"
+                                                       name="group_date_of_join"
+                                                       placeholder="dd.mm.yyyy"
+                                                       value="{{ employee_obj.GroupOfDateOfJoin|date:'Y-m-d' }}"
+                                                       class="form-control"
+                                                       required/>
+                                           </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                           <div class="form-group">
+                                               <label for="date_of_separation">DateOfSeparation</label>
+                                                <input type="date" tabindex="1" id="date_of_separation"
+                                                       name="date_of_separation"
+                                                       placeholder="dd.mm.yyyy"
+                                                       value="{{ employee_obj.DateOfSeparation|date:'Y-m-d' }}"
+                                                       class="form-control"
+                                                       required/>
+                                           </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                           <div class="form-group">
+                                               <label for="date_of_retirement">DateOfRetirement</label>
+                                                <input type="date" tabindex="1" id="date_of_retirement"
+                                                       name="date_of_retirement"
+                                                       placeholder="dd.mm.yyyy"
+                                                       value="{{ employee_obj.DateOfRetirement|date:'Y-m-d' }}"
+                                                       class="form-control"
+                                                       required/>
+                                           </div>
+                                        </div>
+                                    </div>
+                                    <div class="row row_label_bold_css" >
+                                        <div class="col-md-3">
+                                           <div class="form-group">
+                                               <label for="adani_exp">Adani Experience</label>
+                                                <input type="text" tabindex="1" id="adani_exp"
+                                                       name="adani_exp"
+                                                       placeholder="Adani Exp"
+                                                       value="{{ employee_obj.AdaniExperience}}"
+                                                       class="form-control"
+                                                       required/>
+                                           </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                           <div class="form-group">
+                                               <label for="previous_exp">Previous Experience</label>
+                                                <input type="text" tabindex="1" id="previous_exp"
+                                                       name="previous_exp"
+                                                       placeholder="Previous Experience"
+                                                       value="{{ employee_obj.PreviousExperience }}"
+                                                       class="form-control"
+                                                       required/>
+                                           </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                           <div class="form-group">
+                                               <label for="total_year_of_exp">TotalYearOfExperience</label>
+                                                <input type="text" tabindex="1" id="total_year_of_exp"
+                                                       name="total_year_of_exp"
+                                                       placeholder="Total year of exp"
+                                                       value="{{ employee_obj.TotalYearOfExperience }}"
+                                                       class="form-control"
+                                                       required/>
+                                           </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                           <div class="form-group">
+                                               <label for="reporting_manager_id">Reporting MangerID</label>
+                                                <input type="text" tabindex="1" id="reporting_manager_id"
+                                                       name="reporting_manager_id"
+                                                       placeholder="Reporting ManagerId"
+                                                       value="{{ employee_obj.ReportingMangerID }}"
+                                                       class="form-control"
+                                                       required/>
+                                           </div>
+                                        </div>
+                                    </div>
+                                    <div class="row row_label_bold_css" >
+                                        <div class="col-md-3">
+                                           <div class="form-group">
+                                               <label for="reporting_manager_position">ReportingManger Position</label>
+                                                <input type="text" tabindex="1" id="reporting_manager_position"
+                                                       name="reporting_manager_position"
+                                                       placeholder="Reporting manager position"
+                                                       value="{{ employee_obj.ReportingMangerPosition}}"
+                                                       class="form-control"
+                                                       required/>
+                                           </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                           <div class="form-group">
+                                               <label for="reporting_manager_full_name">ReportingManger FullName</label>
+                                                <input type="text" tabindex="1" id="reporting_manager_full_name"
+                                                       name="reporting_manager_full_name"
+                                                       placeholder="Reporting Manager Full Name"
+                                                       value="{{ employee_obj.ReportingMangerFullName }}"
+                                                       class="form-control"
+                                                       required/>
+                                           </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                           <div class="form-group">
+                                               <label for="hod_emp_id">HOD EMP ID</label>
+                                                <input type="text" tabindex="1" id="hod_emp_id"
+                                                       name="hod_emp_id"
+                                                       placeholder="Hod emp id"
+                                                       value="{{ employee_obj.HODEMPID }}"
+                                                       class="form-control"
+                                                       required/>
+                                           </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                           <div class="form-group">
+                                               <label for="hod_full_name">HOD FullName</label>
+                                                <input type="text" tabindex="1" id="hod_full_name"
+                                                       name="hod_full_name"
+                                                       placeholder="Hod full name"
+                                                       value="{{ employee_obj.HODFullName }}"
+                                                       class="form-control"
+                                                       required/>
+                                           </div>
+                                        </div>
+                                    </div>
+                                    <div class="row row_label_bold_css" >
+                                        <div class="col-md-3">
+                                           <div class="form-group">
+                                               <label for="functional_manager_id">Functional ManagerID</label>
+                                                <input type="text" tabindex="1" id="functional_manager_id"
+                                                       name="functional_manager_id"
+                                                       placeholder="Functional manager id"
+                                                       value="{{ employee_obj.FunctionalManagerID}}"
+                                                       class="form-control"
+                                                       required/>
+                                           </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                           <div class="form-group">
+                                               <label for="functional_manager_full_name">Functional Manager FullName</label>
+                                                <input type="text" tabindex="1" id="functional_manager_full_name"
+                                                       name="functional_manager_full_name"
+                                                       placeholder="Functional Manager Full Name"
+                                                       value="{{ employee_obj.FunctionalManagerFullName }}"
+                                                       class="form-control"
+                                                       required/>
+                                           </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                           <div class="form-group">
+                                               <label for="kra_status">KRA Status</label>
+                                                <input type="text" tabindex="1" id="kra_status"
+                                                       name="kra_status"
+                                                       placeholder="KRA Status"
+                                                       value="{{ employee_obj.KRAStatus }}"
+                                                       class="form-control"
+                                                       required/>
+                                           </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                           <div class="form-group">
+                                               <label for="domicile_state">DomicileState</label>
+                                                <input type="text" tabindex="1" id="domicile_state"
+                                                       name="domicile_state"
+                                                       placeholder="DomicileState"
+                                                       value="{{ employee_obj.DomicileState }}"
+                                                       class="form-control"
+                                                       required/>
+                                           </div>
+                                        </div>
+                                    </div>
+                                     <div class="row row_label_bold_css" >
+                                        <div class="col-md-3">
+                                           <div class="form-group">
+                                               <label for="ujr">UJR</label>
+                                                <input type="text" tabindex="1" id="ujr"
+                                                       name="ujr"
+                                                       placeholder="UJR"
+                                                       value="{{ employee_obj.UJR }}"
+                                                       class="form-control"
+                                                       required/>
+                                           </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                           <div class="form-group">
+                                               <label for="last_promotion_date">Last Promotion Date</label>
+                                                <input type="date" tabindex="1" id="last_promotion_date"
+                                                       name="last_promotion_date"
+                                                       placeholder="Last Promotion Date"
+                                                       value="{{ employee_obj.Last_Promotion_Date|date:'Y-m-d' }}"
+                                                       class="form-control"
+                                                       />
+                                           </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                           <div class="form-group">
+                                               <label for="last_transfer_date">Last Transfer Date</label>
+                                                <input type="date" tabindex="1" id="last_transfer_date"
+                                                       name="last_transfer_date"
+                                                       placeholder="Last Transfer Date"
+                                                       value="{{ employee_obj.Last_Transfer_Date|date:'Y-m-d' }}"
+                                                       class="form-control"
+                                                       />
+                                           </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                           <div class="form-group">
+                                               <label for="hod">HOD</label>
+                                                <input type="text" tabindex="1" id="hod"
+                                                       name="hod"
+                                                       placeholder="HOD"
+                                                       value="{{ employee_obj.Hod }}"
+                                                       class="form-control"
+                                                       required/>
+                                           </div>
+                                        </div>
+                                    </div>
+                                    <div class="row row_label_bold_css" >
+                                        <div class="col-md-3">
+                                           <div class="form-group">
+                                               <label for="eduction">Eduction</label>
+                                                <input type="text" tabindex="1" id="eduction"
+                                                       name="eduction"
+                                                       placeholder="Eduction"
+                                                       value="{{ employee_obj.Education }}"
+                                                       class="form-control"
+                                                       required/>
+                                           </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                           <div class="form-group">
+                                               <label for="compliance_training_status">Compliance Training Status</label>
+                                                <input type="text" tabindex="1" id="compliance_training_status"
+                                                       name="compliance_training_status"
+                                                       placeholder="Compliance Training Status"
+                                                       class="form-control"
+                                                       value="{{ employee_obj.Compliance_Training_Status }}"
+                                                       required/>
+                                           </div>
+                                        </div>
+
+                                    </div>
+                                    <input type="Submit" class="mybtn" value="Update">
+                                </form>
+                            </div>
+                         </div>
+                       </div>
+                    </div>
+                 </div>
+                 <br><br>
+              </div>
+           </div>
+        </div>
+        <div class="footer">
+            <span> Powered By A-Tech </span>
+        </div>
+     {% endblock body %}
+  </div>
+  {% include 'common/footer.html' %}
+  {% block script %}
+<!--  <script type="text/javascript" src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>-->
+<!--  <script>-->
+<!--      $('#example').DataTable({-->
+<!--         "paging": false,-->
+<!--         "searching": false,-->
+<!--         "responsive": false,-->
+<!--         "info": false-->
+<!--      });-->
+<!--  </script>-->
+  {% endblock script %}
+</body>
+</html>

@@ -1,0 +1,48 @@
+body[data-sidebar=colored] .vertical-menu {
+    background: #4E78A8;
+    border-color: #4E78A8;
+}
+body[data-sidebar=colored] .navbar-brand-box {
+    background-color: #4E78A8;
+}
+body[data-sidebar=colored].vertical-collpsed .vertical-menu #sidebar-menu>ul>li:hover>a {
+    background-color: #4E78A8;
+    color: #fff;
+}
+body{
+    font-family: adani regular;
+}
+.active>.page-link, .page-link.active {
+    background-color: #4e78a8;
+}
+
+.table .table-light {
+    color: #f5f5f5;
+    border-color: var(--bs-border-color);
+    background-color: #dee2e6;
+    border: 1px solid #000000;
+    --bs-table-bg: #4E78A8;
+}
+
+.table-bordered {
+        border: 1px solid #000000;
+}
+
+.custom-btn:hover {
+      background-color: #748fb7!important;
+      color: white!important;
+}
+.custom-btn:active {
+     background-color: #748fb7!important;
+     color: white!important;
+}
+
+.custom-btn:focus{background-color: #748fb7!important;}
+
+.custom-btn{
+    --bs-btn-border-color: black;
+    border: 1px;
+}
+.line_break{
+    padding-top: 15px;
+}

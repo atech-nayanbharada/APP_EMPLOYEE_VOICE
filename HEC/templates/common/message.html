@@ -1,0 +1,20 @@
+<script>
+  $(document).ready(function() {
+    {% if messages %}
+      {% for message in messages %}
+        {% if message.tags == 'alert-success' %}
+          toastr.success('{{ message }}')
+        {% elif message.tags == 'alert-warning' %}
+          toastr.warning('{{ message }}')
+        {% else %}
+          toastr.error('{{ message }}')
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+    {% if form.non_field_errors %}
+      {% for error in form.non_field_errors %}
+        toastr.error('{{ error }}')
+      {% endfor %}
+    {% endif %}
+  });
+</script>

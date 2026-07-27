@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Adani | Contact Center App </title>
+  {% include 'common/header.html' %}
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+<style>
+#blink {
+    font-size: 10px;
+    font-weight: bold;
+    font-family: sans-serif;
+    color: red;
+}
+
+</style>
+<style>
+table, td, div, h1, p {
+  font-family:  'Adani Regular';
+ }
+
+.table1 , th1, td1 {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+</style>
+<style>
+.collapsible {
+  background-color: #4e78a8;
+  color: white;
+  cursor: pointer;
+  padding: 3px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+.active, .collapsible:hover {
+  background-color: #4e78a8;
+}
+
+.content {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+  background-color: #f1f1f1;
+}
+</style>
+</head>
+
+<body id="mybody">
+  {% include 'common/nav_bar.html' %}
+  <div class="pcoded-main-container">
+        <div class="pcoded-content">
+           {% block body %}
+           <div class="pcoded-inner-content">
+              <div class="main-body">
+                 <div class="page-wrapper">
+                    <div class="page-body">
+                        <br><br><br>
+                        <h6 class="heads"> Employee Details</h6>
+                        <div class="col-xl-12">
+                         <div class="card proj-progress-card">
+                            <div class="card-block" style="border-top: 2px solid #3498db;">
+                                <div class="row row_label_bold_css" id="content_row1">
+                                  <div class="col-md-2">
+                                     <label> Employee ID </label>
+                                        {% if employee_obj.EmployeeNumber %}
+                                        <h4> {{ employee_obj.EmployeeNumber }}</h4>
+                                        {% else %}
+                                        <h5>XXXXXXXXXX</h5>
+                                        {% endif %}
+                                  </div>
+                                  <div class="col-md-2">
+                                     <label>Employee Name</label>
+                                        {% if employee_obj.EmployeeName %}
+                                        <h5> {{ employee_obj.EmployeeName }}</h5>
+                                        {% else %}
+                                        <h5>XXXXXXXXXX</h5>
+                                        {% endif %}
+                                  </div>
+                                  <div class="col-md-2">
+                                     <label>Grade</label>
+                                        {% if employee_obj.Position %}
+                                        <h5> {{ employee_obj.Position }}</h5>
+                                        {% else %}
+                                        <h5>XXXXXXXXXX</h5>
+                                        {% endif %}
+                                  </div>
+                                  <div class="col-md-2">
+                                     <label>DOB</label>
+                                     {% if employee_obj.DateOfBirth %}
+                                     <h5>{{employee_obj.DateOfBirth}}</h5>
+                                     {% else %}
+                                     <h5>XXXXXXXXXX</h5>
+                                     {% endif %}
+                                  </div>
+                                  <div class="col-md-2">
+                                     <label>Department </label>
+                                     {% if employee_obj.DepartmentReportingName %}
+                                     <h5> {{ employee_obj.DepartmentReportingName }}</h5>
+                                     {% else %}
+                                     <h5>XXXXXXXXXX</h5>
+                                     {% endif %}
+                                  </div>
+                                  <div class="col-md-2">
+                                     <label>BusinessUnit</label>
+                                        {% if employee_obj.BusinessUnit %}
+                                        <h5> {{ employee_obj.BusinessUnit }}</h5>
+                                        {% else %}
+                                        <h5>XXXXXXXXXX</h5>
+                                        {% endif %}
+                                  </div>
+                               </div>
+                               <div class="row row_label_bold_css" id="content_row">
+                                  <div class="col-md-2">
+                                     <label>DOJ</label>
+                                        {% if employee_obj.DateOfJoin %}
+                                           {% if employee_obj.check_employee_is_new_joiner %}
+                                              <h5> {{ employee_obj.DateOfJoin }} <div id="blink">New Joiner</div> </h5>
+                                           {% else %}
+                                               <h5> {{ employee_obj.DateOfJoin }} </h5>
+                                           {% endif %}
+                                     {% else %}
+                                        <h5>XXXXXXXXXX</h5>
+                                        {% endif %}
+                                  </div>
+                                  <div class="col-md-2">
+                                     <label>Group DOJ</label>
+                                        {% if employee_obj.GroupOfDateOfJoin %}
+                                        <h5> {{ employee_obj.GroupOfDateOfJoin }}</h5>
+                                        {% else %}
+                                        <h5>XXXXXXXXXX</h5>
+                                        {% endif %}
+                                  </div>
+                                  <div class="col-md-2">
+                                     <label>Location</label>
+                                        {% if employee_obj.Location %}
+                                        <h5> {{employee_obj.Location}}</h5>
+                                        {% else %}
+                                        <h5>XXXXXXXXXX</h5>
+                                        {% endif %}
+                                  </div>
+                                  <div class="col-md-2">
+                                        <label>Manager Id</label>
+                                           {% if employee_obj.ReportingMangerID %}
+                                           <h5> {{ employee_obj.ReportingMangerID }}</h5>
+                                           {% else %}
+                                           <h5>XXXXXXXXXX</h5>
+                                           {% endif %}
+                                  </div>
+                                  <div class="col-md-2">
+                                        <label>Manager Name</label>
+                                           {% if employee_obj.ReportingMangerFullName %}
+                                           <h5> {{ employee_obj.ReportingMangerFullName }}</h5>
+
+                                           {% else %}
+                                           <h5>XXXXXXXXXX</h5>
+                                           {% endif %}
+                                  </div>
+                                  <div class="col-md-2">
+                                        <label>Location </label>
+                                        {% if employee_obj.Location %}
+                                        <h5> {{ employee_obj.Location }}</h5>
+                                        {% else %}
+                                        <h5>XXXXXXXXXX</h5>
+                                        {% endif %}
+                                  </div>
+                               </div>
+                         </div>
+                      </div>
+                        </div>
+                            <h6 class="heads">Employee Review</h6>
+                            <div class="col-xl-12">
+                             <div class="card proj-progress-card">
+                                <div class="card-block" style="border-top: 2px solid #3498db;">
+                                   <div class="row" id="content_row1">
+                                       <div class="col-md-12">
+                                           {% if employee_obj.check_employee_final_submit_review_exists %}
+                                                 {% for employee_root_category_obj in employee_obj.get_employee_submitted_review reversed  %}
+                                                    <button type="button" class="collapsible">Review {{ forloop.counter }}</button>
+                                                       <div class="content">
+                                                           <p>
+                                                               <table style="border: 1px solid black; border-collapse: collapse; margin: 5px;padding: 2px ;" class="table1" width="100%" cellpadding="0" cellspecing="0">
+                                                                       <thead style="background-color: #4e78a8; font-weight: bold;">
+                                                                            <th colspan="3" style="text-align: center; color:white"> </th>
+                                                                       </thead>
+                                                                       <tbody style="border: 1px solid black; border-collapse: collapse;">
+                                                                           <tr style="border: 1px solid black; border-collapse: collapse;">
+                                                                               <td style="text-align: center;font-weight: bold; border: 1px solid black; border-collapse: collapse;" width="50%">Submitted By</td>
+                                                                               <td style="text-align: center; font-weight: bold;border: 1px solid black; border-collapse: collapse;" width="50%">{{ employee_root_category_obj.SubmittedBy.full_name }}</td>
+                                                                           </tr>
+                                                                             <tr style="border: 1px solid black; border-collapse: collapse;">
+                                                                               <td style="text-align: center;font-weight: bold; border: 1px solid black; border-collapse: collapse;" width="50%">Submitted Date</td>
+                                                                               <td style="text-align: center; font-weight: bold;border: 1px solid black; border-collapse: collapse;" width="50%">{{ employee_root_category_obj.submitted_date|date:"d.m.Y" }}</td>
+                                                                           </tr>
+
+                                                                       </tbody>
+                                                                       <tfoot>
+                                                                       <td colspan="3" style="border: 1px solid black; border-collapse: collapse;text-align: center;">{{ review_category_obj.AdditionalComment }}</td>
+                                                                       </tfoot>
+                                                                   </table>
+                                                                    <br>
+
+                                                               {% for review_category_obj in employee_root_category_obj.employee_root_category_review.all %}
+                                                                   <table style="border: 1px solid black; border-collapse: collapse; margin: 5px;padding: 2px ;" class="table1" width="100%" cellpadding="0" cellspecing="0">
+                                                                       <thead style="background-color: #4e78a8; font-weight: bold;">
+                                                                            <th colspan="3" style="text-align: center; color:white"> {{ review_category_obj.Category.CategoryName }}</th>
+                                                                       </thead>
+                                                                       <tbody style="border: 1px solid black; border-collapse: collapse;">
+                                                                           <tr style="border: 1px solid black; border-collapse: collapse;">
+                                                                               <td style="text-align: center;font-weight: bold; border: 1px solid black; border-collapse: collapse;" width="70%">Question</td>
+                                                                               <td style="text-align: center; font-weight: bold;border: 1px solid black; border-collapse: collapse;" width="10%">Answer</td>
+                                                                               <td style="text-align: center;font-weight: bold; border: 1px solid black; border-collapse: collapse;" width="20%">Remarks</td>
+                                                                           </tr>
+                                                                           {% for question_ans_obj in review_category_obj.employee_review_ques_ans.all %}
+                                                                               <tr style="border: 1px solid black; border-collapse: collapse;">
+                                                                                   <td style="border: 1px solid black; border-collapse: collapse;">{{ question_ans_obj.Question.Question }}</td>
+                                                                                   <td style="border: 1px solid black; border-collapse: collapse;text-align: center;">{{ question_ans_obj.Ans }}</td>
+                                                                                   <td style="border: 1px solid black; border-collapse: collapse;text-align: center;">{{ question_ans_obj.remark }}</td>
+                                                                               </tr>
+                                                                           {% endfor %}
+                                                                       </tbody>
+                                                                       <tfoot>
+                                                                       <td colspan="3" style="border: 1px solid black; border-collapse: collapse;text-align: center;">{{ review_category_obj.AdditionalComment }}</td>
+                                                                       </tfoot>
+                                                                   </table>
+                                                           {% endfor %}
+                                                           </p>
+                                                       </div>
+                                                    <br><br>
+                                                {% endfor %}
+<!--                                           <table border="1" id="example" style="width:100%">-->
+<!--                                               <thead>-->
+<!--                                                    <tr>-->
+<!--                                                        <th>Submitted By</th>-->
+<!--                                                        <th>Submitted Date</th>-->
+<!--                                                        <th>Detail</th>-->
+<!--                                                    </tr>-->
+<!--                                               </thead>-->
+<!--                                               <tbody>-->
+<!--                                                    {% for employee_root_category_obj in employee_obj.get_employee_submitted_review %}-->
+<!--                                                        <tr>-->
+<!--                                                            <td>-->
+<!--                                                                {{ employee_root_category_obj.SubmittedBy.full_name }}-->
+<!--                                                            </td>-->
+<!--                                                            <td>-->
+<!--                                                                {{ employee_root_category_obj.submitted_date|date:"d.m.Y" }}-->
+<!--                                                            </td>-->
+<!--                                                            <td>-->
+<!--                                                                <table border="1" style="width:100%">-->
+<!--                                                                    <thead>-->
+<!--                                                                    <th>Category</th>-->
+<!--                                                                    <th>Comment</th>-->
+<!--                                                                    <th>Detail</th>-->
+<!--                                                                    </thead>-->
+<!--                                                                    <tbody>-->
+<!--                                                                    {% for employee_review_category in employee_root_category_obj.employee_root_category_review.all %}-->
+<!--                                                                    <tr>-->
+<!--                                                                        <td>{{ employee_review_category.Category}}</td>-->
+<!--                                                                        <td>{{ employee_review_category.AdditionalComment}}-->
+<!--                                                                        </td>-->
+<!--                                                                        <td>-->
+<!--                                                                            <table border="1" style="width:100%">-->
+<!--                                                                     <thead>-->
+<!--                                                                        <th>Question</th>-->
+<!--                                                                        <th>Answer</th>-->
+<!--                                                                        <th>Remarks</th>-->
+<!--                                                                    </thead>-->
+<!--                                                                    <tbody>-->
+<!--                                                                        {% for category_que_ans in employee_review_category.employee_review_ques_ans.all %}-->
+<!--                                                                            <tr>-->
+<!--                                                                                <td>{{ category_que_ans.Question.Question }}</td>-->
+<!--                                                                                <td>{{ category_que_ans.Ans }}</td>-->
+<!--                                                                                <td>{{ category_que_ans.remark }}</td>-->
+<!--                                                                            </tr>-->
+<!--                                                                        {% endfor %}-->
+<!--                                                                    </tbody>-->
+<!--                                                                 </table>-->
+<!--                                                                        </td>-->
+<!--                                                                    </tr>-->
+<!--                                                                    {% endfor %}-->
+<!--                                                                    </tbody>-->
+<!--                                                                </table>-->
+
+<!--                                                            </td>-->
+
+
+<!--                                                        </tr>-->
+<!--                                                    {% endfor %}-->
+<!--                                               </tbody>-->
+<!--                                           </table>-->
+                                           {% else %}
+                                                No Previous Review History
+                                           {% endif %}
+                                       </div>
+                                   </div>
+                                </div>
+                             </div>
+                           </div>
+                    </div>
+                 </div>
+                 <br><br>
+              </div>
+           </div>
+        </div>
+        <div class="footer">
+            <span> Powered By A-Tech </span>
+        </div>
+     {% endblock body %}
+  </div>
+  {% include 'common/footer.html' %}
+  {% block script %}
+  <script type="text/javascript" src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<!--  <script>-->
+<!--      $('#example').DataTable({-->
+<!--         "paging": true,-->
+<!--         "searching": true,-->
+<!--         "responsive": true,-->
+<!--      });-->
+<!--  </script>-->
+<script type="text/javascript">
+    var blink =
+        document.getElementById('blink');
+
+    setInterval(function () {
+        blink.style.opacity =
+        (blink.style.opacity == 0 ? 1 : 0);
+    }, 1000);
+
+</script>
+<script>
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+}
+</script>
+  {% endblock script %}
+</body>
+</html>

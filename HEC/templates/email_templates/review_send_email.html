@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="x-apple-disable-message-reformatting">
+  <title></title>
+  <style>
+    table, td, div, h1, p {
+      font-family:  'Adani Regular';
+     }
+    .table1 , th1, td1 {
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+  </style>
+
+</head>
+
+<body style="margin:0;padding:0;">
+  <table role="presentation" style="width:100%;border-collapse:collapse;border:0;border-spacing:0;background:#ffffff;">
+    <tr>
+      <td align="center" style="padding:0;">
+
+        <table role="presentation" style="width:80%;border-collapse:collapse;border:1px solid #cccccc;border-spacing:0;text-align:left;">
+          <tr>
+            <td align="left" style="padding:40px 0 30px 0;background:#FFFFFF;">
+              <img src="https://eibd.fa.em2.oraclecloud.com/fscmUI/adfsr/1595078379251/mds-repository__ADFSR__New_Button_Color_18_Jul-2020alta_v1__ADFSR__-879990040__ADFSR__20bbuttonvisibility/adani_logo_3.png" alt="" width="160" height="55" style="display:block;" />
+            </td>
+
+          </tr>
+          <tr>
+            <td style="padding:20px 30px 42px 30px;">
+              <table role="presentation" style="width:100%;border-collapse:collapse;border:0;border-spacing:0;">
+                <tr>
+                  <td style="padding:0 0 1px 0;color:#153643;">
+                    <h1 style="font-size:24px;margin:0 0 20px 0;font-family:&quot;Adani Regular&quot;;color:#4e78a8;mso-fareast-language:EN-IN">HR Employee Connect</h1>
+                    <p style="margin:0 0 12px 0;font-size:16px;line-height:24px;font-family:&quot;Adani Regular&quot;;color:black;mso-fareast-language:EN-IN">Hi {{ user_name }}, </p>
+                    <p style="margin:0 0 12px 0;font-size:16px;line-height:24px;font-family:&quot;Adani Regular&quot;;color:black;mso-fareast-language:EN-IN">
+                      I hope this message finds you well. We are pleased to provide you with a concise summary of the key points discussed during your recent one-on-one meeting with {{ employee_name }}. This summary is intended to ensure clarity and alignment on your discussions.
+                    </p>
+                    </br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding:0;">
+                    <table role="presentation" style="width:100%;border-collapse:collapse;border:0;border-spacing:0;">
+
+                    </table>
+                      <br>
+                  </td>
+                </tr>
+              </table>
+            </td>
+
+          </tr>
+          <td>
+              {% for review_category_obj in employee_review_obj.employee_root_category_review.all %}
+            <table  style="border: 1px solid black; border-collapse: collapse; margin: 5px;padding: 2px ;"
+            class="table1" width="98%" cellpadding="0" cellspecing="0">
+                <thead style="background-color: #4e78a8; font-weight: bold;">
+                    <th colspan="3"  style="text-align: center; color:white" > {{ review_category_obj.Category.CategoryName}} </th>
+                    </thead>
+
+                    <tbody style="border: 1px solid black; border-collapse: collapse;">
+                        <tr  style="border: 1px solid black; border-collapse: collapse;">
+                       <td  style="text-align: center;font-weight: bold; border: 1px solid black; border-collapse: collapse;" width="70%">Question </td>
+                       <td style="text-align: center; font-weight: bold;border: 1px solid black; border-collapse: collapse;" width="10%">Answer</td>
+                       <td style="text-align: center;font-weight: bold; border: 1px solid black; border-collapse: collapse;" width="20%">Remarks</td>
+                    </tr>
+                    {% for question_ans_obj in review_category_obj.employee_review_ques_ans.all %}
+                    <tr style="border: 1px solid black; border-collapse: collapse;">
+                        <td style="border: 1px solid black; border-collapse: collapse;">{{ question_ans_obj.Question.Question }}</td>
+                        <td style="border: 1px solid black; border-collapse: collapse;text-align: center;">{{ question_ans_obj.Ans }}</td>
+                        <td style="border: 1px solid black; border-collapse: collapse;text-align: center;">{{ question_ans_obj.remark }}</td>
+                    </tr>
+                    {% endfor %}
+
+<!--                     <tr>-->
+<!--                        <td style="border: 1px solid black; border-collapse: collapse;">Probation Confirmation days Overdue? </td>-->
+<!--                        <td style="border: 1px solid black; border-collapse: collapse;text-align: center;">Yes</td>-->
+<!--                        <td style="border: 1px solid black; border-collapse: collapse;text-align: center;">Remarks </td>-->
+<!--                     </tr>-->
+
+<!--                     <tr>-->
+<!--                        <td style="border: 1px solid black; border-collapse: collapse;">Stationery kit/Landline/SIM/Work Station wihtin 2 days joining? </td>-->
+<!--                        <td style="border: 1px solid black; border-collapse: collapse;text-align: center;">No</td>-->
+<!--                        <td style="border: 1px solid black; border-collapse: collapse;text-align: center;">Remarks  a b c</td>-->
+<!--                     </tr>-->
+<!--                     <tr>-->
+<!--                        <td style="border: 1px solid black; border-collapse: collapse;">Laptop / Desktop/Email id within 2 days of joining? </td>-->
+<!--                        <td style="border: 1px solid black; border-collapse: collapse;text-align: center;">Yes</td>-->
+<!--                        <td style="border: 1px solid black; border-collapse: collapse;text-align: center;">Remarks</td>-->
+<!--                     </tr>-->
+
+                    </tbody>
+                    <tfoot>
+                      <td colspan="3" style="border: 1px solid black; border-collapse: collapse;text-align: center;">
+                        {{ review_category_obj.AdditionalComment }}
+                      </td>
+                      </tfoot>
+            </table>
+            {% endfor %}
+
+          </td>
+
+          <tr>
+            <td style="padding:30px;background:#4e78a8;;">
+              <table role="presentation" style="width:100%;border-collapse:collapse;border:0;border-spacing:0;font-size:9px;font-family:Arial,sans-serif;">
+                <tr>
+                  <td style="padding:0;width:50%;" align="left">
+                    <p style="margin:0;font-size:14px;line-height:16px;font-family:Arial,sans-serif;color:#ffffff;">
+                      &reg; Powered By A-Tech<br/><a style="color:#ffffff;text-decoration:underline;"></a>
+                    </p>
+                  </td>
+                  <td style="padding:0;width:50%;" align="right">
+                    <table role="presentation" style="border-collapse:collapse;border:0;border-spacing:0;">
+                      <tr>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+            </td>
+            <td style="padding:30px;background:#4e78a8;;"></td>
+          </tr>
+          <tr>
+              <td>
+                  <span style="color:red;">Disclaimer: This is a system-generated email. Please do not reply to this message.</span>
+              </td>
+          </tr>
+        </table>
+
+      </td>
+    </tr>
+  </table>
+</body>
+</html>

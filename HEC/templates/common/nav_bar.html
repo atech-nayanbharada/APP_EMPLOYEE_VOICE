@@ -1,0 +1,30 @@
+{% load static %}
+<div class="pcoded">
+    <nav class="navbar header-navbar pcoded-header">
+        <div class="color-line"></div>
+        <div class="row headerrow">
+            <div class="col-xl-4">
+                <a href="{% url 'review:employee_review' %}">
+                    <img src="/static/assets/img/Adani.png" style="height: 30px; ">
+                </a>
+            </div>
+
+            <div class="col-xl-4">
+                <center><h3 style="background: linear-gradient(to right, #1598b0e0 15%, #2757C9 25%, #ed095a 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: bold;"> <img height="40px" width="40px" src="{% static 'assets/img/hr_sampark_logo.jpg' %}">   HR Sampark </h3></center>
+            </div>
+
+            <div class="col-xl-4">
+                <ul>
+                    <li><a href="{% url 'review:employee_review' %}">Home </a></li>
+                    <li>Dashboard</li>
+                    <li><a href="{% url 'review:employee_list_view' %}">Employee History</a></li>
+<!--                    <li><a href="{% url 'review:employee_file_submit' %}">Upload</a></li>-->
+                    <li><a href="{% url 'user:logout' %}">Logout </a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>

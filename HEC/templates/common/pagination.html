@@ -1,0 +1,60 @@
+{% load static %}
+{% load static pagination_tags %}
+{% if is_paginated %}
+
+<!--    <div class="pagination">-->
+<!--    <span class="step-links">-->
+<!--        {% if page_obj.has_previous %}-->
+<!--            <a href="?page=1">&laquo; first</a>-->
+<!--            <a href="?page={{ page_obj.previous_page_number }}">previous</a>-->
+<!--        {% endif %}-->
+
+<!--        <span class="current">-->
+<!--            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.-->
+<!--        </span>-->
+
+<!--        {% if page_obj.has_next %}-->
+<!--            <a href="?page={{ page_obj.next_page_number }}">next</a>-->
+<!--            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>-->
+<!--        {% endif %}-->
+<!--    </span>-->
+<!--</div>-->
+
+    <div class="pageallmain">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination pagination-rounded justify-content-end">
+                {% if page_obj.has_previous %}
+                    <li class="pagination_class">
+                        <a class="page-link" data-count="1" href="?{% get_parameters 'page' %}page=1">First</a>
+                    </li>
+                    <li class="pagination_class">
+                        <a  data-count="{{ page_obj.previous_page_number}}" href="?{% get_parameters 'page' %}page={{ page_obj.previous_page_number }}">
+                        </a>
+                    </li>
+                {% endif %}
+
+                {% for i in page_obj.paginator.page_range %}
+                    {% if page_obj.number == i %}
+                        <li class="pagination_class">
+                            <a class="page-link active" data-count="{{ i }}" href="?{% get_parameters 'page' %}page={{ i }}" >{{ i }}</a>
+                        </li>
+                    {% elif i > page_obj.number|add:'-3' and i < page_obj.number|add:'2' %}
+                        <li class="pagination_class">
+                            <a class="page-link" data-count="{{ i }}" href="?{% get_parameters 'page' %}page={{ i }}">{{ i }}</a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+
+                {% if page_obj.has_next %}
+                    <li class="pagination_class">
+                        <a data-count="{{ page_obj.next_page_number}}" href="?{% get_parameters 'page' %}page={{ page_obj.next_page_number }}">
+                        </a>
+                    </li>
+                    <li class="pagination_class">
+                        <a class="page-link" data-count="{{ page_obj.paginator.num_pages }}" href="?{% get_parameters 'page' %}page={{ page_obj.paginator.num_pages }}">Last</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+{% endif %}

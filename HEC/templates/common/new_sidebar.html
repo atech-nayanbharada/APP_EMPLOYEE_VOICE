@@ -1,0 +1,48 @@
+{% load static %}
+<div class="vertical-menu">
+    <!-- LOGO -->
+    <div class="navbar-brand-box">
+
+        <a href="index.html" class="logo logo-light">
+            <span class="logo-sm">
+                <img src="{% static 'new_design/assets/images/logo-sm-light.png' %}" alt="logo-sm-light"
+                     height="24">
+            </span>
+            <span class="logo-lg">
+                <img src="{% static 'new_design/assets/images/logo-sm-light.png' %}" alt="logo-light"
+                     height="22">
+                <span style="font-size: 18px;color: white;padding-left: 9px;font-weight: 900;"> HR Sampark</span>
+            </span>
+        </a>
+    </div>
+
+    <button type="button" class="btn btn-sm px-3 font-size-24 header-item waves-effect vertical-menu-btn"
+            id="vertical-menu-btn">
+        <i class="ri-menu-2-line align-middle"></i>
+    </button>
+
+    <div data-simplebar class="vertical-scroll">
+
+        <!--- Sidemenu -->
+        <div id="sidebar-menu">
+            <!-- Left Menu Start -->
+            <ul class="metismenu list-unstyled" id="side-menu">
+                <li>
+                    <a href="{% url 'user:dashboard' %}" class="waves-effect">
+                        <i class="uim uim-airplay"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'review:all_employee_list' %}" class="waves-effect">
+                        <i class="uim uim-airplay"></i>
+                        <span>Employee List</span>
+                    </a>
+                </li>
+
+
+            </ul>
+        </div>
+        <!-- Sidebar -->
+    </div>
+</div>

@@ -1,0 +1,67 @@
+{% load static %}
+{% load custom_filter %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <title>Adani | Contact Center App </title>
+        {% include 'common/header.html' %}
+
+   </head>
+
+   <body id="mybody">
+       {% include 'common/nav_bar.html' %}
+         <div class="pcoded-main-container">
+            <div class="pcoded-content">
+               {% block body %}
+               <div class="pcoded-inner-content">
+                  <div class="main-body">
+                     <div class="page-wrapper">
+                        <div class="page-body">
+                           <br><br><br>
+                           <div class="row">
+                              {% comment %} <h6 class="heads"> Collecting Employee Details</h6> {% endcomment %}
+                              <div class="col-xl-12">
+                                 {% for m in messages  %}
+                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                       <strong></strong> {{m}}
+                                       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                         <span aria-hidden="true">&times;</span>
+                                       </button>
+                                    </div>
+                                 {% endfor %}
+                                 <div class="card proj-progress-card">
+                                    <div class="card-block" style="border-top: 2px solid #3498db;">
+                                       <div class="row">
+                                          <div class="col-xl-10">
+                                             <form method="post" enctype="multipart/form-data">
+                                                {% csrf_token %}
+                                                <label for="input_file">Input File </label>
+                                                <input type="file" id="input_file" name="input_file"  required/>
+                                                <input type="Submit" class="mybtn" name="search" value="Upload">
+                                                <a class="custom_button_link" download href="{% static 'assets/sample_file/HEC_SAMPLE_FILE_FINAL_COPY.xlsx' %}">Sample File</a>
+                                             </form>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+         <div class="footer">
+            <span> Powered By A-Tech </span>
+         </div>
+
+         {% endblock body %}
+      </div>
+
+        {% include 'common/footer.html' %}
+      {% block script %}
+
+	   {% endblock script %}
+   </body>
+</html>

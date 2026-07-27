@@ -1,0 +1,58 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Dashboard | Tocly - Admin & Dashboard Template</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="" name="description" />
+        <meta content="" name="author" />
+        {% include 'common/new_header.html' %}
+
+        {% block extra_css %} {# Override this in templates to add extra CSS #} {% endblock extra_css %}
+    </head>
+
+    <body data-sidebar="colored">
+
+    <!-- <body data-layout="horizontal" data-topbar="dark"> -->
+
+        <!-- Begin page -->
+        <div id="layout-wrapper">
+            <!-- ========== Page navbar  ========== -->
+            {% block navbar %}
+
+            {% endblock navbar%}
+
+            <!-- ========== Left Sidebar Start ========== -->
+            {% include 'common/new_sidebar.html' %}
+            <!-- Left Sidebar End -->
+
+
+
+            <!-- ============================================================== -->
+            <!-- Start right Content here -->
+            <!-- ============================================================== -->
+            <div class="main-content">
+
+                <div class="page-content">
+                    <div class="container-fluid">
+                        {% block content %}
+
+                        {% endblock content %}
+                    </div>
+                    <!-- container-fluid -->
+                </div>
+                <!-- End Page-content -->
+
+                {% include 'common/new_footer_text.html' %}
+            </div>
+            <!-- end main content-->
+
+        </div>
+        <!-- END layout-wrapper -->
+
+      {% include 'common/new_footer.html' %}
+      {% block extra_js %} {# Override this in templates to add extra javascript #} {% endblock extra_js %}
+    </body>
+
+</html>

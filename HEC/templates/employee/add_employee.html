@@ -1,0 +1,250 @@
+{% extends 'common/base.html' %}
+
+{% block extra_css %}
+<!-- extra css -->
+{% endblock %}
+
+{% block navbar %}
+{% include 'common/new_nav_bar.html' with nav_bar_title="Add Employee" %}
+{% endblock navbar%}
+
+{% block content %}
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <form>
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label for="employee_number"><b>Employee Number</b></label>
+                                <input type="text" class="form-control" id="employee_number" name="employee_number"
+                                           placeholder="Employee Number" required>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="employee_name"><b>Employee Name</b></label>
+                                <input type="text" class="form-control" id="employee_name" name="employee_name"
+                                       placeholder="Employee name" required>
+                            </div>
+                            <div class="col-md-3">
+                                  <label for="position_code"><b>Position Code</b></label>
+                                  <input type="text" class="form-control" id="position_code" name="position_code"
+                                       placeholder="Position code" required>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="position"><b>Position</b></label>
+                                  <input type="text" class="form-control" id="position" name="position"
+                                       placeholder="Position" required>
+                            </div>
+                        </div>
+                        <div class="line_break"></div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label for="grade_code"><b>GradeCode</b></label>
+                                <input type="text" class="form-control" id="grade_code" name="grade_code"
+                                           placeholder="Grade Code" required>
+                            </div>
+                            <div class="col-md-3">
+                                 <label for="employee_status"><b>Employee Status</b></label>
+                                <input type="text" class="form-control" id="employee_status" name="employee_status"
+                                           placeholder="Employee Status" required>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="employee_type"><b>Employee Type</b></label>
+                                <input type="text" class="form-control" id="employee_type" name="employee_type"
+                                           placeholder="Employee Type" required>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="business_unit"><b>Business Unit</b></label>
+                                <input type="text" class="form-control" id="business_unit" name="business_unit"
+                                           placeholder="Business Unit" required>
+                            </div>
+                        </div>
+                         <div class="line_break"></div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label for="legal_entity"><b>LegalEntity</b></label>
+                                <input type="text" class="form-control" id="legal_entity" name="legal_entity"
+                                           placeholder="Legal Entity" required>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="dept_oracle_string"><b>Department of Oracle String</b></label>
+                                <input type="text" class="form-control" id="dept_oracle_string" name="dept_oracle_string"
+                                           placeholder="Department of Oracle String" required>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="department_reporting_name"><b>Department Reporting Name</b></label>
+                                <input type="text" class="form-control" id="department_reporting_name" name="department_reporting_name"
+                                           placeholder="Department Reporting Name" required>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="location"><b>Location</b></label>
+                                <input type="text" class="form-control" id="location" name="location"
+                                           placeholder="Location" required>
+                            </div>
+                        </div>
+                        <div class="line_break"></div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label for="date_of_birth"><b>DateOfBirth</b></label>
+                                <input type="text" class="form-control" id="date_of_birth" name="date_of_birth"
+                                           placeholder="DateOfBirth" required>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="age"><b>Age</b></label>
+                                <input type="text" class="form-control" id="age" name="age"
+                                           placeholder="Age" required>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="gender"><b>Gender</b></label>
+                                <input type="text" class="form-control" id="gender" name="gender"
+                                           placeholder="Gender" required>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="marital_status"><b>Marital Status</b></label>
+                                <input type="text" class="form-control" id="marital_status" name="marital_status"
+                                           placeholder="Marital Status" required>
+                            </div>
+                        </div>
+                        <div class="line_break"></div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label for="date_of_join"><b>DateOfJoin</b></label>
+                                <input type="text" class="form-control" id="date_of_join" name="date_of_join"
+                                            placeholder="dd.mm.yyyy" required>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="group_date_of_join"><b>GroupOfDateOfJoin</b></label>
+                                <input type="text" class="form-control" id="group_date_of_join" name="group_date_of_join"
+                                            placeholder="dd.mm.yyyy" required>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="date_of_separation"><b>DateOfSeparation</b></label>
+                                <input type="text" tabindex="1" id="date_of_separation"
+                                       name="date_of_separation"
+                                       placeholder="dd.mm.yyyy"
+                                       class="form-control"
+                                       required/>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="date_of_retirement"><b>DateOfRetirement</b></label>
+                                <input type="text" tabindex="1" id="date_of_retirement"
+                                       name="date_of_retirement"
+                                       placeholder="dd.mm.yyyy"
+                                       class="form-control"
+                                       required/>
+                            </div>
+                        </div>
+                        <div class="line_break"></div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label for="adani_exp"><b>Adani Experience</b></label>
+                                <input type="text" class="form-control" id="adani_exp" name="adani_exp"
+                                            placeholder="Adani Exp" required>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="previous_exp"><b>Previous Experience</b></label>
+                                <input type="text" class="form-control" id="previous_exp" name="previous_exp"
+                                            placeholder="Previous Experience" required>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="total_year_of_exp"><b>TotalYearOfExperience</b></label>
+                                <input type="text" tabindex="1" id="total_year_of_exp"
+                                       name="total_year_of_exp"
+                                       placeholder="Total year of exp"
+                                       class="form-control"
+                                       required/>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="reporting_manager_id"><b>Reporting MangerID</b></label>
+                                <input type="text" tabindex="1" id="reporting_manager_id"
+                                       name="reporting_manager_id"
+                                       placeholder="Reporting ManagerId"
+                                       class="form-control"
+                                       required/>
+                            </div>
+                        </div>
+                        <div class="line_break"></div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label for="reporting_manager_position"><b>ReportingManger Position</b></label>
+                                <input type="text" tabindex="1" id="reporting_manager_position"
+                                       name="reporting_manager_position"
+                                       placeholder="Reporting manager position"
+                                       class="form-control"
+                                       required/>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="reporting_manager_full_name"><b>ReportingManger FullName</b></label>
+                                <input type="text" tabindex="1" id="reporting_manager_full_name"
+                                       name="reporting_manager_full_name"
+                                       placeholder="Reporting Manager Full Name"
+                                       class="form-control"
+                                       required/>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="hod_emp_id"><b>HOD EMP ID</b></label>
+                                <input type="text" tabindex="1" id="hod_emp_id"
+                                       name="hod_emp_id"
+                                       placeholder="Hod emp id"
+                                       class="form-control"
+                                       required/>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="hod_full_name"><b>HOD FullName</b></label>
+                                <input type="text" tabindex="1" id="hod_full_name"
+                                       name="hod_full_name"
+                                       placeholder="Hod full name"
+                                       class="form-control"
+                                       required/>
+                            </div>
+                        </div>
+                        <div class="line_break"></div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label for="functional_manager_id"><b>Functional ManagerID</b></label>
+                                <input type="text" tabindex="1" id="functional_manager_id"
+                                       name="functional_manager_id"
+                                       placeholder="Functional manager id"
+                                       class="form-control"
+                                       required/>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="functional_manager_full_name"><b>Functional Manager FullName</b></label>
+                                <input type="text" tabindex="1" id="functional_manager_full_name"
+                                       name="functional_manager_full_name"
+                                       placeholder="Functional Manager Full Name"
+                                       class="form-control"
+                                       required/>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="kra_status"><b>KRA Status</b></label>
+                                <input type="text" tabindex="1" id="kra_status"
+                                       name="kra_status"
+                                       placeholder="KRA Status"
+                                       class="form-control"
+                                       required/>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="domicile_state"><b>DomicileState</b></label>
+                                <input type="text" tabindex="1" id="domicile_state"
+                                       name="domicile_state"
+                                       placeholder="DomicileState"
+                                       class="form-control"
+                                       required/>
+                            </div>
+                        </div>
+                        <div class="line_break"></div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <button type="submit" class="btn btn-info custom-btn waves-effect waves-light" style="background-color: #5677a7;">Submit</button>
+                                <a href="{% url 'review:all_employee_list' %}" class="btn btn-info custom-btn waves-effect waves-light" style="background-color: #5677a7;">Cancel</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% include 'common/message.html' %}

@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <title>Adani | Contact Center App </title>
+
+      <link rel="icon" href="/static/files/assets/images/favicon.ico" type="image/x-icon">
+      <link rel="stylesheet" type="text/css" href="/static/files/bower_components/bootstrap/css/bootstrap.min.css">
+      <link rel="stylesheet" href="/static/files/assets/pages/waves/css/waves.min.css" type="text/css" media="all">
+      <link rel="stylesheet" type="text/css" href="/static/files/assets/icon/feather/css/feather.css">
+      <link rel="stylesheet" type="text/css" href="/static/files/assets/css/font-awesome-n.min.css">
+      <link rel="stylesheet" type="text/css" href="/static/files/assets/css/style.css">
+      <link rel="stylesheet" type="text/css" href="/static/files/assets/css/widget.css">
+
+      <style>
+          .knobs,
+          .layer {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+          }
+          
+          .button {
+            position: relative;
+            top: 50%;
+            width: 50px;
+            height: 30px;
+            margin: -20px 5 0 5;
+            overflow: hidden;
+          }
+          
+          .button.r,
+          .button.r .layer {
+            border-radius: 100px;
+          }
+          
+          .checkbox {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+            opacity: 0;
+            cursor: pointer;
+            z-index: 3;
+          }
+          
+          .knobs {
+            z-index: 2;
+          }
+          
+          .layer {
+            width: 100%;
+            background-color: #ebf7fc;
+            transition: 0.3s ease all;
+            z-index: 1;
+          }
+
+          /* Button 4 */
+         #button-4 .knobs:before,
+         #button-4 .knobs:after {
+         position: absolute;
+         top: 4px;
+         left: 4px;
+         width: 25px;
+         height: 22px;
+         color: #fff;
+         font-size: 10px;
+         text-align: center;
+         line-height: 0.5;
+         padding: 9px 4px;
+         background-color: green;
+         border-radius: 50%;
+         transition: 0.3s cubic-bezier(0.18, 0.89, 0.35, 1.15) all;
+         }
+
+         #button-4 .knobs:before {
+         content: "Yes";
+         }
+
+         #button-4 .knobs:after {
+         content: "No";
+         }
+
+         #button-4 .knobs:after {
+         top: -28px;
+         right: 4px;
+         left: auto;
+         background-color: #f44336;
+         }
+
+         #button-4 .checkbox:checked + .knobs:before {
+         top: -28px;
+         }
+
+         #button-4 .checkbox:checked + .knobs:after {
+         top: 4px;
+         }
+
+         #button-4 .checkbox:checked ~ .layer {
+         background-color: #fcebeb;
+         }
+
+         .card .card-block {
+            padding: 1rem!important;
+        }
+         
+         .button {
+            position: relative;
+            color: #FFFFFF;
+            border-radius: 10px;
+          }
+          
+          .button:active {
+            background: #007a63;
+          }
+          
+          .button__text {
+            color: #ffffff;
+            transition: all 0.2s;
+          }
+
+         .color-line {
+            background: #f7f9fa;
+            height: 4px;
+            background-image: linear-gradient(to right, #34495e, #34495e, #9b59b6, #9b59b6, #3498db, #3498db, #62cb31, #62cb31, #ffb606, #ffb606, #e67e22, #e67e22, #e74c3c, #e74c3c, #c0392b, #c0392b);
+            background-size: 100% 6px;
+            background-position: 50% 100%;
+            background-repeat: no-repeat
+         }
+
+         .heads{
+            margin-left: 15px;
+            font-size: 12px;
+         }
+
+         .mybtn {
+         background-color: #543167;
+         color: white;
+         border-radius: 5px;
+         }
+
+         .sub_btn{
+            position: absolute; 
+            bottom: 5px; 
+         }
+
+         .card-block{
+            font-size:13px!important;  
+         }
+
+         .card-block:hover{
+            box-shadow: 4px 4px 4px 4px rgba(0,0,0,0.24); 
+         }
+
+         .header-navbar{
+            background: white;  
+            box-shadow: 0px 0px 5px #000!important;
+            position: fixed!important; 
+         }
+          
+         .tabs {
+            position: relative;
+            margin: 0.5rem 0;
+            background: #543167;
+            height: 14.75rem;
+         }
+
+         .tabs::before,
+         .tabs::after {
+            content: "";
+            display: table;
+         }
+
+         .tabs::after {
+            clear: both;
+         }
+
+         .tab {
+            float: left;
+         }
+         .tab-switch {
+            display: none;
+         }
+
+         .tab-label {
+            position: relative;
+            display: block;
+            line-height: 2.75em;
+            height: 3em;
+            padding: 0 1.618em;
+            background: #543167;
+            border-right: 0.125rem solid #543167;
+            color: #fff;
+            cursor: pointer;
+            top: 0;
+            transition: all 0.25s;
+         }
+
+         .tab-label:hover {
+            top: -0.25rem;
+            transition: top 0.25s;
+         }
+
+         .tab-content {
+            height: 12rem;
+            position: absolute;
+            z-index: 1;
+            top: 2.75em;
+            left: 0;
+            padding: 1.618rem;
+            background: #fff;
+            color: #2c3e50;
+            border-bottom: 0.25rem solid #bdc3c7;
+            opacity: 0;
+            transition: all 0.35s;
+            width: 100%;
+         }
+
+         .tab-switch:checked + .tab-label {
+            background: #fff;
+            color: #2c3e50;
+            border-bottom: 0;
+            border-right: 0.125rem solid #fff;
+            transition: all 0.35s;
+            z-index: 1;
+            top: -0.0625rem;
+         }
+
+         .tab-switch:checked + label + .tab-content {
+            z-index: 2;
+            opacity: 1;
+            transition: all 0.35s;
+         }
+
+         .headerrow{
+            padding-top: 1.5%; 
+         }
+
+         .footer{
+            background: #543167; 
+            position: absolute;
+            bottom: 2px; 
+            width: 100%;
+            text-align: center; 
+            color: white;
+            padding: 5px; 
+         }
+
+         li{
+            float: left;
+            padding-left: 8px;
+            padding-right: 8px;  
+            padding-bottom: 1px; 
+            padding-top: 2px; 
+            font-size: 13px; 
+         }
+
+         li:hover{
+            border-bottom: 2px solid purple; 
+            cursor: pointer;
+            color: grey;
+         }
+
+         h4, h5{
+            font-size: 13px!important; 
+         }
+
+         #content_row label{
+            font-weight: bold;
+            font-size: 14px; 
+         }
+        
+      </style> 
+   </head>
+   
+   <body id="mybody">
+      <div class="pcoded">
+         <nav class="navbar header-navbar pcoded-header">
+         <div class="color-line"> </div>
+            <div class="row headerrow">
+               <div class="col-xl-4">
+                 <img src="/static/assets/img/Adani.png" style="height: 30px; ">               
+               </div> 
+
+               <div class="col-xl-4">
+                  <center> <h3 style="color: purple"> HR Employee Connect </h3> </center>           
+               </div> 
+
+               <div class="col-xl-4">
+                     <ul>
+                        <li>Home </li>
+                        <li>Dashboard </li>
+                        <li>Employee History </li>
+                        <li>Logout </li> 
+                     </ul>      
+               </div> 
+            </div>
+         </nav>     
+
+         <div class="pcoded-main-container">
+            <div class="pcoded-content">  
+               {% block body %}
+               <div class="pcoded-inner-content">
+                  <div class="main-body">
+                     <div class="page-wrapper">
+                        <div class="page-body">
+                           <br><br><br>
+                           
+                              <div clas="row"> 
+                                 {% comment %} <h6 class="heads"> Collecting Employee Details</h6> {% endcomment %}
+                                 <div class="col-xl-12">
+                                    <div class="card proj-progress-card">                                
+                                       <div class="card-block" style="border-top: 2px solid #3498db;">                                            
+                                          <div class="row">
+                                             <div class="col-xl-12">
+                                                <form action="/fetchemployeeid" method="POST">
+                                                   {% csrf_token %}
+                                                   <label for="emp">Employee Id  </label>
+                                                   <input type="text" tabindex="1" id="emp" name="emp"  
+                                                   {% if 'EMPID' in request.session %}
+                                                      value="{{request.session.EMPID}}"
+                                                   {% endif %}
+                                                   placeholder="Emp id" style="width: 600px" required/>
+                                                   <input type="Submit" class="mybtn" name="search" value="Fetch Details"> 
+                                                </form>
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div> 
+
+                              <h6 class="heads"> Employee Details</h6>
+                              <div class="col-xl-12">
+                                 <div class="card proj-progress-card">                                
+                                    <div class="card-block" style="border-top: 2px solid #3498db;">                                            
+                                       <div class="row" id="content_row">
+                                          <div class="col-md-2">
+                                             <label> Employee ID</label>
+                                             
+                                             {% if 'EMPID' in request.session %}
+                                                <h4> {{request.session.EMPID}}</h4>
+                                                {% else %}
+                                                <h5>XXXXXXXXXX</h5>
+                                                {% endif %}
+                                          </div>
+
+                                          <div class="col-md-2">
+                                             <label> Employee Name</label>
+                                                {% if 'EmpName' in request.session %}
+                                                <h5> {{request.session.EmpName}}</h5>
+                                                {% else %}
+                                                <h5>XXXXXXXXXX</h5>
+                                                {% endif %}
+                                          </div>
+
+                                          <div class="col-md-2">
+                                             <label>Grade</label>
+                                                {% if 'EmpDesignation' in request.session %}
+                                                <h5> {{request.session.EmpDesignation}}</h5>
+                                                {% else %}
+                                                <h5>XXXXXXXXXX</h5>
+                                                {% endif %}
+                                          </div>
+
+                                          <div class="col-md-2">
+                                             <label>DOB</label>
+                                             {% if 'EmpDept' in request.session %}
+                                             <h5> {{request.session.EmpDept}}</h5>
+                                             {% else %}
+
+                                             <h5>XXXXXXXXXX</h5>
+                                             {% endif %}
+                                          </div>
+
+                                          <div class="col-md-2">
+                                             <label>Department </label>
+                                             {% if 'EmpCompanyName' in request.session %}
+                                             <h5> {{request.session.EmpCompanyName}}</h5>
+                                             {% else %}
+
+                                             <h5>XXXXXXXXXX</h5>
+                                             {% endif %}
+                                          </div>
+
+                                          <div class="col-md-2">
+                                             <label>Function</label>
+                                                {% if 'EmpLocation' in request.session %}
+                                                <h5> {{request.session.EmpLocation}}</h5>
+                                                {% else %}
+
+                                                <h5>XXXXXXXXXX</h5>
+                                                {% endif %}
+                                          </div>
+
+                                       </div> 
+                           
+                                       <div class="row" id="content_row">
+                                          <div class="col-md-2">
+                                             <label> Group DOJ</label>
+                                                {% if 'EmpLocation' in request.session %}
+                                                <h5> {{request.session.EmpLocation}}</h5>
+                                                {% else %}
+
+                                                <h5>XXXXXXXXXX</h5>
+                                                {% endif %}
+                                          </div>
+
+                                          <div class="col-md-2">
+                                             <label>Adani DOJ</label>
+                                                {% if 'EmpCompanyCode' in request.session %}
+                                                <h5> {{request.session.EmpCompanyCode}}</h5>
+                                                {% else %}
+
+                                                <h5>XXXXXXXXXX</h5>
+                                                {% endif %}
+                                          </div>
+
+                                          <div class="col-md-2">
+                                             <label>Tenure</label>
+                                                {% if 'EmpManager' in request.session %}
+                                                <h5> {{request.session.EmpManager}}</h5>
+                                                {% else %}
+
+                                                <h5>XXXXXXXXXX</h5>
+                                                {% endif %}
+                                          </div>
+                                         
+                                          <div class="col-md-2">
+                                                <label>Manager Emp ID</label>
+                                                   {% if 'EmpCompanyCode' in request.session %}
+                                                   <h5> {{request.session.EmpCompanyCode}}</h5>
+                                                   {% else %}
+
+                                                   <h5>XXXXXXXXXX</h5>
+                                                   {% endif %}
+                                          </div>
+                                          <div class="col-md-2">
+                                                <label>Manager Name</label>
+                                                   {% if 'EmpManager' in request.session %}
+                                                   <h5> {{request.session.EmpManager}}</h5>
+                                                   {% else %}
+
+                                                   <h5>XXXXXXXXXX</h5>
+                                                   {% endif %}
+                                          </div>
+                                          <div class="col-md-2">
+                                                <label>Email ID </label>
+                                                {% if 'EmpCompanyName' in request.session %}
+                                                <h5> {{request.session.EmpCompanyName}}</h5>
+                                                {% else %}
+
+                                                <h5>XXXXXXXXXX</h5>
+                                                {% endif %}
+                                          </div>
+                                       </div>  
+                                 </div> 
+                              </div>
+                        </div>
+                     </div>
+
+                     {%if 'EMPID' in request.session %}
+                        <h6 class="heads"> Add Query Details </h6>
+                        <form action='/RegQuery' method="POST">
+                           {% csrf_token %} 
+                           <div class="col-xl-12" >
+                              <div class="card proj-progress-card">                                         
+                                 <div class="card-block"  style="border-top: 2px solid #9b59b6;">
+                                    <div class="row">
+                                       <div class="col-xl-12 col-md-12">   
+                                          <div class="tabs">
+                                             <div class="tab">
+                                                <input type="radio" name="css-tabs" id="tab-1" checked class="tab-switch">
+                                                <label for="tab-1" class="tab-label">New Joinee
+                                                </label>
+                                                <div class="tab-content">
+                                                   <div class="questions">
+                                                      <table> 
+                                                         <tr> 
+                                                            <td><i class="fa fa-check" aria-hidden="true"></i> </td> 
+                                                            <td>New Joinee?   </td> 
+                                                            <td>
+                                                               <div class="button r" id="button-4">
+                                                                  <input type="checkbox" class="checkbox" />
+                                                                  <div class="knobs"></div>
+                                                                  <div class="layer"></div>
+                                                               </div> 
+                                                            </td>
+                                                         </tr>
+
+                                                         <tr> 
+                                                            <td><i class="fa fa-check" aria-hidden="true"></i> </td>  
+                                                            <td>Laptop / Desktop/Email id within 2 days of joining? </td> 
+                                                            <td>
+                                                               <div class="button r" id="button-4">
+                                                                  <input type="checkbox" class="checkbox" />
+                                                                  <div class="knobs"></div>
+                                                                  <div class="layer"></div>
+                                                               </div> 
+                                                            </td> 
+                                                         </tr> 
+
+                                                         <tr>  
+                                                            <td><i class="fa fa-check" aria-hidden="true"></i> </td> 
+                                                            <td>Stationery kit/Landline/SIM/Work Station wihtin 2 days joining?</td> 
+                                                            <td>
+                                                               <div class="button r" id="button-4">
+                                                                  <input type="checkbox" class="checkbox" />
+                                                                  <div class="knobs"></div>
+                                                                  <div class="layer"></div>
+                                                               </div> 
+                                                            </td> 
+                                                         </tr>
+
+                                                         <tr>  
+                                                            <td><i class="fa fa-check" aria-hidden="true"></i></td> 
+                                                            <td>Probation Confirmation days Overdue?</td> 
+                                                            <td>
+                                                               <div class="button r" id="button-4">
+                                                                  <input type="checkbox" class="checkbox" />
+                                                                  <div class="knobs"></div>
+                                                                  <div class="layer"></div>
+                                                               </div> 
+                                                            </td> 
+                                                         </tr>
+                                                         
+                                                         
+                                                         
+                                                      </table> 
+                                                   </div>
+                                                   <center>
+                                                      <button type="submit" class="mybtn sub_btn">
+                                                         Submit
+                                                      </button>
+                                                   </center>
+                                                </div>
+                                             </div>
+                                             
+                                             <div class="tab">
+                                                <input type="radio" name="css-tabs" id="tab-2" class="tab-switch">
+                                                <label for="tab-2" class="tab-label">Achievo</label>
+                                                <div class="tab-content">
+                                                   My father now and then sending me small sums of money, I laid them out in learning navigation, and other parts of the mathematics, useful to those who intend to travel, as I always believed it would be, some time or other, my fortune to do. 
+                                                   <center>
+                                                      <button type="submit" class="mybtn sub_btn" >
+                                                         Submit
+                                                      </button>
+                                                   </center>
+                                                </div>
+                                             </div>
+
+                                             <div class="tab">
+                                                <input type="radio" name="css-tabs" id="tab-3" class="tab-switch">
+                                                <label for="tab-3" class="tab-label">Attendex  </label>
+                                                <div class="tab-content">
+                                                   When I left Mr. Bates, I went down to my father: where, by the assistance of him and my uncle John, and some other relations, I got forty pounds, and a promise of thirty pounds a year to maintain me at Leyden: there I studied physic two years and seven months, knowing it would be useful in long voyages.
+                                                   <center>
+                                                      <button type="submit" class="mybtn sub_btn">
+                                                         Submit
+                                                      </button>
+                                                   </center>
+                                                </div>
+                                             </div>
+
+                                             <div class="tab">
+                                                <input type="radio" name="css-tabs" id="tab-4" class="tab-switch">
+                                                <label for="tab-4" class="tab-label">DiverseUnity </label>
+                                                <div class="tab-content">
+                                                   When I left Mr. Bates, I went down to my father: where, by the assistance of him and my uncle John, and some other relations, I got forty pounds, and a promise of thirty pounds a year to maintain me at Leyden: there I studied physic two years and seven months, knowing it would be useful in long voyages.
+                                                   <center>
+                                                      <button type="submit" class="mybtn sub_btn">
+                                                         Submit
+                                                      </button>
+                                                   </center>
+                                                </div>
+                                             </div>
+
+                                             <div class="tab">
+                                                <input type="radio" name="css-tabs" id="tab-5" class="tab-switch">
+                                                <label for="tab-5" class="tab-label">HRPerks </label>
+                                                <div class="tab-content">
+                                                   When I left Mr. Bates, I went down to my father: where, by the assistance of him and my uncle John, and some other relations, I got forty pounds, and a promise of thirty pounds a year to maintain me at Leyden: there I studied physic two years and seven months, knowing it would be useful in long voyages.
+
+                                                        <div class="button r" id="button-4">
+                                                          <input type="checkbox" class="checkbox" />
+                                                          <div class="knobs"></div>
+                                                          <div class="layer"></div>
+                                                        </div>
+
+                                                   <center>
+                                                      <button type="submit" class="mybtn sub_btn">
+                                                         Submit
+                                                      </button>
+                                                   </center>
+                                                </div>
+                                             </div>
+
+                                          </div>                        
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </form>
+                     {% endif %}
+                     {% comment %} <center>
+                        <button type="submit" class="mybtn">
+                           Complete Review 
+                        </button>
+                     </center> {% endcomment %}
+                     <br><br> 
+                  </div>
+
+               </div>
+            </div>
+         </div> 
+
+         <div class="footer">
+            <span> Powered By A-Tech </span> 
+         </div> 
+            
+         {% endblock body %}
+      </div>
+
+      <script type="text/javascript" src="/static/files/bower_components/jquery/js/jquery.min.js"></script>
+      <script type="text/javascript" src="/static/files/bower_components/jquery-ui/js/jquery-ui.min.js"></script>
+      <script type="text/javascript" src="/static/files/bower_components/popper.js/js/popper.min.js"></script>
+      <script type="text/javascript" src="/static/files/bower_components/bootstrap/js/bootstrap.min.js"></script>
+      <script src="/static/files/assets/pages/waves/js/waves.min.js"></script>
+      <script type="text/javascript" src="/static/files/bower_components/jquery-slimscroll/js/jquery.slimscroll.js"></script>
+      <script src="/static/files/assets/pages/widget/amchart/amcharts.js"></script>
+      <script src="/static/files/assets/pages/widget/amchart/serial.js"></script>
+      <script src="/static/files/assets/pages/widget/amchart/light.js"></script>
+      <script src="/static/files/assets/js/pcoded.min.js"></script>
+      <script src="/static/files/assets/js/vertical/vertical-layout.min.js"></script>
+      <script type="text/javascript" src="/static/files/assets/pages/dashboard/custom-dashboard.min.js"></script>
+      <script type="text/javascript" src="/static/files/assets/js/script.min.js"></script> 
+      
+      {% block script %}
+
+	   {% endblock script %}
+   </body>
+</html>

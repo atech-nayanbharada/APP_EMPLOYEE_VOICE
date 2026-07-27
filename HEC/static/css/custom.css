@@ -1,0 +1,289 @@
+.knobs,
+  .layer {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+
+  .button {
+    position: relative;
+    top: 50%;
+    width: 50px;
+    height: 30px;
+    margin: -20px 5 0 5;
+    overflow: hidden;
+  }
+
+  .button.r,
+  .button.r .layer {
+    border-radius: 100px;
+  }
+
+  .checkbox {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 3;
+  }
+
+  .knobs {
+    z-index: 2;
+  }
+
+  .layer {
+    width: 100%;
+    background-color: #ebf7fc;
+    transition: 0.3s ease all;
+    z-index: 1;
+  }
+
+  /* Button 4 */
+ #button-4 .knobs:before,
+ #button-4 .knobs:after {
+ position: absolute;
+ top: 4px;
+ left: 4px;
+ width: 25px;
+ height: 22px;
+ color: #fff;
+ font-size: 10px;
+ text-align: center;
+ line-height: 0.5;
+ padding: 9px 4px;
+ background-color: green;
+ border-radius: 50%;
+ transition: 0.3s cubic-bezier(0.18, 0.89, 0.35, 1.15) all;
+ }
+
+ #button-4 .knobs:before {
+ content: "Yes";
+ }
+
+ #button-4 .knobs:after {
+ content: "No";
+ }
+
+ #button-4 .knobs:after {
+ top: -28px;
+ right: 4px;
+ left: auto;
+ background-color: #543167;
+ }
+
+ #button-4 .checkbox:checked + .knobs:before {
+ top: -28px;
+ }
+
+ #button-4 .checkbox:checked + .knobs:after {
+ top: 4px;
+ }
+
+ #button-4 .checkbox:checked ~ .layer {
+ background-color: #fcebeb;
+ }
+
+ .card .card-block {
+    padding: 1rem!important;
+}
+
+ .button {
+    position: relative;
+    color: #FFFFFF;
+    border-radius: 10px;
+  }
+
+  .button:active {
+    background: #007a63;
+  }
+
+  .button__text {
+    color: #ffffff;
+    transition: all 0.2s;
+  }
+
+ .color-line {
+    background: #f7f9fa;
+    height: 4px;
+    background-image: linear-gradient(to right, #34495e, #34495e, #9b59b6, #9b59b6, #3498db, #3498db, #62cb31, #62cb31, #ffb606, #ffb606, #e67e22, #e67e22, #e74c3c, #e74c3c, #c0392b, #c0392b);
+    background-size: 100% 6px;
+    background-position: 50% 100%;
+    background-repeat: no-repeat
+ }
+
+ .heads{
+    margin-left: 15px;
+    font-size: 12px;
+ }
+
+ .mybtn {
+ background-color: #4e78a8;
+ color: white;
+ border-radius: 5px;
+ }
+
+ .sub_btn{
+    position: relative;
+    bottom: 5px;
+ }
+
+ .card-block{
+    font-size:13px!important;
+ }
+
+ .card-block:hover{
+    box-shadow: 4px 4px 4px 4px rgba(0,0,0,0.24);
+ }
+
+ .header-navbar{
+    background: white;
+    box-shadow: 0px 0px 5px #000!important;
+    position: fixed!important;
+ }
+
+ .tabs {
+    position: relative;
+    margin: 0.5rem 0;
+    background: #4e78a8;
+    height: 22rem;
+ }
+
+ .tabs::before,
+ .tabs::after {
+    content: "";
+    display: table;
+ }
+
+ .tabs::after {
+    clear: both;
+ }
+
+ .tab {
+    float: left;
+ }
+ .tab-switch {
+    display: none;
+ }
+
+ .tab-label {
+    position: relative;
+    display: block;
+    line-height: 2.75em;
+    height: 3em;
+    padding: 0 1.618em;
+    background: #4e78a8;
+    border-right: 0.125rem solid #4e78a8;
+    color: #fff;
+    cursor: pointer;
+    top: 0;
+    transition: all 0.25s;
+ }
+
+ .tab-label:hover {
+    top: -0.25rem;
+    transition: top 0.25s;
+ }
+
+ .tab-content {
+    height: 20rem;
+    position: absolute;
+    z-index: 1;
+    top: 2.75em;
+    left: 0;
+    padding: 1.618rem;
+    background: #fff;
+    color: #2c3e50;
+    border-bottom: 0.25rem solid #bdc3c7;
+    opacity: 0;
+    transition: all 0.35s;
+    width: 100%;
+    overflow-x: scroll;
+ }
+
+ .tab-switch:checked + .tab-label {
+    background: #fff;
+    color: #2c3e50;
+    border-bottom: 0;
+    border-right: 0.125rem solid #fff;
+    transition: all 0.35s;
+    z-index: 1;
+    top: -0.0625rem;
+ }
+
+ .tab-switch:checked + label + .tab-content {
+    z-index: 2;
+    opacity: 1;
+    transition: all 0.35s;
+ }
+
+ .headerrow{
+    padding-top: 1.5%;
+ }
+
+ .footer{
+    position: absolute;
+    bottom: 2px;
+    width: 100%;
+    text-align: center;
+    color: white;
+    padding: 5px;
+    background: linear-gradient(to right, #1598b0e0 15%, #2757C9 25%, #ed095a 100%);
+ }
+
+ li{
+    float: left;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-bottom: 1px;
+    padding-top: 2px;
+    font-size: 13px;
+ }
+
+ li:hover{
+    border-bottom: 2px solid purple;
+    cursor: pointer;
+    color: grey;
+ }
+
+ h4, h5{
+    font-size: 13px!important;
+ }
+
+ #content_row label{
+    font-weight: bold;
+    font-size: 14px;
+ }
+
+ .row_label_bold_css{
+    font-weight: bold;
+    font-size: 14px;
+ }
+
+ .que_tab {
+    width: 98%;
+ }
+ .custom_que_tab {
+    width: 60%;
+ }
+
+ .custom_button_link{
+     background-color: #4e78a8;
+     color: white;
+     border-radius: 5px;
+     padding: 3.9px;
+ }
+
+.pagination_class{
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-bottom: 0px;
+    padding-top: 10px;
+}
+.custom_float_right{
+    float: right;
+}
