@@ -19,13 +19,43 @@ class CategoryQuestion(TimeStampedModel,ActivatorModel):
     NEGATIVE = 'negative'
     QUESTION_TYPE_LIST = ((POSITIVE, 'Positive'), (NEGATIVE, 'Negative'))
     AnsType = ((TEXT, "Text"), (BOOLEAN, "Boolean"))
+
+    # ---------- NEW: widget selector for the UI ----------
+    TRI_YES = 'tri_yes'
+    TRI_RAG = 'tri_rag'
+    DROPDOWN = 'dropdown'
+    TEXTBOX = 'textbox'
+    TEXTAREA = 'textarea'
+    DATE = 'date'
+
+    WIDGET_TYPE_LIST = (
+        (TRI_YES, 'Tri-State (Yes / N/A / No)'),
+        (TRI_RAG, 'Tri-State (Red / Amber / Green)'),
+        (DROPDOWN, 'Dropdown'),
+        (TEXTBOX, 'Text Box'),
+        (TEXTAREA, 'Text Area'),
+        (DATE, 'Date Picker')
+    )
+
+
     Question = models.CharField(max_length=500)
     QuestionType = models.CharField(max_length=500, choices=AnsType)
     Category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="category_question")
+    # NEW fields
+    WidgetType = models.CharField(max_length=20, choices=WIDGET_TYPE_LIST, default=TRI_YES)
+    Options = models.CharField(max_length=500, blank=True, null=True,help_text="Comma-separated. Only used when WidgetType = Dropdown. e.g. Excellent,Good,Average,Poor")
+
     # QUESTION_TYPE = models.CharField(max_length=10, choices=QUESTION_TYPE_LIST, null=True, blank=True)
 
     def __str__(self):
         return self.Question
+
+    def get_options_list(self):
+        """Clean list of dropdown options."""
+        if self.Options:
+            return [o.strip() for o in self.Options.split(",") if o.strip()]
+        return []
+
 
 
 class EmpReviewRoot(TimeStampedModel, ActivatorModel):
