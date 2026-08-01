@@ -54,11 +54,6 @@
     margin: 2px;
     color: #727C8F;
     cursor: pointer;
-
-/*    -webkit-transition: all 0.5s ease-in-out;
-  -moz-transition:    all 0.5s ease-in-out;
-  -ms-transition:     all 0.5s ease-in-out;
-  -o-transition:      all 0.5s ease-in-out; */
   transition:         all 0.5s ease;
 }
 
@@ -100,6 +95,13 @@
 .tri-state-toggle-button:focus {
   outline: none;
 }
+
+/* Disabled remark box */
+.remark-disabled {
+    background: #e9ecef !important;
+    cursor: not-allowed !important;
+    color: #adb5bd;
+}
 </style>
 <style>
 /* Modal Header */
@@ -139,11 +141,6 @@
   to {top: 0; opacity: 1}
 }
 </style>
-<!--<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">-->
-
-<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">-->
-<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>-->
-<!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>-->
    </head>
 
    <body id="mybody">
@@ -183,9 +180,6 @@
                                                  {% if employee_obj.check_all_category_data_fill_up %}
                                                  <a id="modal_open_button" style="color: white;" class="custom_button_link">Submit</a>
                                                  {% endif %}
-
-
-
                                              </form>
                                           </div>
                                           <div class="col-xl-2">
@@ -299,7 +293,6 @@
                                                 <label>Manager Name</label>
                                                    {% if employee_obj.ReportingMangerFullName %}
                                                    <h5> {{ employee_obj.ReportingMangerFullName }}</h5>
-
                                                    {% else %}
                                                    <h5>XXXXXXXXXX</h5>
                                                    {% endif %}
@@ -344,7 +337,7 @@
 
 
                      {% if employee_obj %}
-                        <h6 class="heads"> Add Query Details </h6>
+                        <h6 class="heads">Add Query Details </h6>
                            <div class="col-xl-12" >
                               <div class="card proj-progress-card">
                                  <div class="card-block"  style="border-top: 2px solid #4e78a8;">
@@ -371,77 +364,30 @@
                                                                                    {% endif %}
                                                                                </td>
                                                                                 <td>{{ question_template_obj.Question }}</td>
-                                                                                 <td>
+                                                                                <td>
+                                                                                    {# ================= DYNAMIC ANSWER WIDGET ================= #}
+                                                                                    {% if check_data.0 == "question_exists" %}
+                                                                                        {% with saved_value=check_data.1 %}
+                                                                                            {% include "review/partials/answer_widget.html" %}
+                                                                                        {% endwith %}
+                                                                                    {% else %}
+                                                                                        {% with saved_value="" %}
+                                                                                            {% include "review/partials/answer_widget.html" %}
+                                                                                        {% endwith %}
+                                                                                    {% endif %}
+                                                                                    {# ========================================================= #}
+                                                                                </td>
+                                                                                <td>
+                                                                                   {# ================= REMARK (enable / disable) ================= #}
+                                                                                   {% if question_template_obj.RemarkEnabled %}
 
-                                                                                     {% if check_data.0 == "question_exists" %}
-                                                                                        {% if question_template_obj.Question == "EWS Status (To be filled by HR – Red/ Amber/ Green)" %}
-                                                                                            {% with employee_obj|review_ews_status as ews_color_status %}
-                                                                                             <input type="hidden" name="category_question_ans_checkbox_{{ question_template_obj.id }}" id="category_question_ans_checkbox_{{ question_template_obj.id }}" value="{{ check_data.1 }}">
-                                                                                             <div class="tri-state-toggle">
-                                                                                                 <a class="tri-state-toggle-button {% if check_data.1 == 'Red' %}red_active{% endif %}"  data-value="Red" data-id="category_question_ans_checkbox_{{ question_template_obj.id }}" data-name="toggle-button_{{ question_template_obj.id }}" id="toggle-button_{{ question_template_obj.id }}_1">Red</a>
-                                                                                                 <a class="tri-state-toggle-button {% if check_data.1 == 'Amber' %}amber_active{% endif %}"  data-value="Amber" data-id="category_question_ans_checkbox_{{ question_template_obj.id }}" data-name="toggle-button_{{ question_template_obj.id }}" id="toggle-button_{{ question_template_obj.id }}_2">Amber</a>
-                                                                                                 <a class="tri-state-toggle-button {% if check_data.1 == 'Green' %}green_active{% endif %}" data-value="Green" data-id="category_question_ans_checkbox_{{ question_template_obj.id }}" data-name="toggle-button_{{ question_template_obj.id }}" id="toggle-button_{{ question_template_obj.id }}_3">Green</a>
-                                                                                             </div>
-                                                                                            {% endwith %}
-                                                                                        {% else %}
-                                                                                             <input type="hidden" name="category_question_ans_checkbox_{{ question_template_obj.id }}" id="category_question_ans_checkbox_{{ question_template_obj.id }}" value="{{ check_data.1 }}">
-                                                                                             <div class="tri-state-toggle">
-                                                                                                 <a class="tri-state-toggle-button {% if check_data.1 == 'Yes' %}active{% endif %}"  data-value="Yes" data-id="category_question_ans_checkbox_{{ question_template_obj.id }}" data-name="toggle-button_{{ question_template_obj.id }}" id="toggle-button_{{ question_template_obj.id }}_1">Yes</a>
-                                                                                                 <a class="tri-state-toggle-button {% if check_data.1 == 'N/A' %}active{% endif %}"  data-value="N/A" data-id="category_question_ans_checkbox_{{ question_template_obj.id }}" data-name="toggle-button_{{ question_template_obj.id }}" id="toggle-button_{{ question_template_obj.id }}_2">N/A</a>
-                                                                                                 <a class="tri-state-toggle-button {% if check_data.1 == 'No' %}active{% endif %}" data-value="No" data-id="category_question_ans_checkbox_{{ question_template_obj.id }}" data-name="toggle-button_{{ question_template_obj.id }}" id="toggle-button_{{ question_template_obj.id }}_3">No</a>
-                                                                                             </div>
-                                                                                         {% endif %}
-                                                                                     {% else %}
-<!--                                                                                         <input type="hidden" name="category_question_ans_checkbox_{{ question_template_obj.id }}" id="category_question_ans_checkbox_{{ question_template_obj.id }}" value="N/A">-->
-                                                                                         {% if question_template_obj.Question == "New Joinee?" %}
-                                                                                            {% if employee_obj.DateOfJoin %}
-                                                                                               {% if employee_obj.check_employee_is_new_joiner %}
-                                                                                                 <input type="hidden" name="category_question_ans_checkbox_{{ question_template_obj.id }}" id="category_question_ans_checkbox_{{ question_template_obj.id }}" value="Yes">
-                                                                                                 <div class="tri-state-toggle">
-                                                                                                     <a class="tri-state-toggle-button active"  data-value="Yes" data-id="category_question_ans_checkbox_{{ question_template_obj.id }}" data-name="toggle-button_{{ question_template_obj.id }}" id="toggle-button_{{ question_template_obj.id }}_1">Yes</a>
-                                                                                                     <a class="tri-state-toggle-button"  data-value="N/A" data-id="category_question_ans_checkbox_{{ question_template_obj.id }}" data-name="toggle-button_{{ question_template_obj.id }}" id="toggle-button_{{ question_template_obj.id }}_2">N/A</a>
-                                                                                                     <a class="tri-state-toggle-button" data-value="No" data-id="category_question_ans_checkbox_{{ question_template_obj.id }}" data-name="toggle-button_{{ question_template_obj.id }}" id="toggle-button_{{ question_template_obj.id }}_3">No</a>
-                                                                                                 </div>
-                                                                                               {% else %}
-                                                                                                <input type="hidden" name="category_question_ans_checkbox_{{ question_template_obj.id }}" id="category_question_ans_checkbox_{{ question_template_obj.id }}" value="No">
-                                                                                                 <div class="tri-state-toggle">
-                                                                                                     <a class="tri-state-toggle-button"  data-value="Yes" data-id="category_question_ans_checkbox_{{ question_template_obj.id }}" data-name="toggle-button_{{ question_template_obj.id }}" id="toggle-button_{{ question_template_obj.id }}_1">Yes</a>
-                                                                                                     <a class="tri-state-toggle-button"  data-value="N/A" data-id="category_question_ans_checkbox_{{ question_template_obj.id }}" data-name="toggle-button_{{ question_template_obj.id }}" id="toggle-button_{{ question_template_obj.id }}_2">N/A</a>
-                                                                                                     <a class="tri-state-toggle-button active" data-value="No" data-id="category_question_ans_checkbox_{{ question_template_obj.id }}" data-name="toggle-button_{{ question_template_obj.id }}" id="toggle-button_{{ question_template_obj.id }}_3">No</a>
-                                                                                                 </div>
-                                                                                               {% endif %}
-                                                                                            {% else %}
-                                                                                                <input type="hidden" name="category_question_ans_checkbox_{{ question_template_obj.id }}" id="category_question_ans_checkbox_{{ question_template_obj.id }}" value="N/A">
-                                                                                                <div class="tri-state-toggle">
-                                                                                                     <a class="tri-state-toggle-button"  data-value="Yes" data-id="category_question_ans_checkbox_{{ question_template_obj.id }}" data-name="toggle-button_{{ question_template_obj.id }}" id="toggle-button_{{ question_template_obj.id }}_1">Yes</a>
-                                                                                                     <a class="tri-state-toggle-button active"  data-value="N/A" data-id="category_question_ans_checkbox_{{ question_template_obj.id }}" data-name="toggle-button_{{ question_template_obj.id }}" id="toggle-button_{{ question_template_obj.id }}_2">N/A</a>
-                                                                                                     <a class="tri-state-toggle-button" data-value="No" data-id="category_question_ans_checkbox_{{ question_template_obj.id }}" data-name="toggle-button_{{ question_template_obj.id }}" id="toggle-button_{{ question_template_obj.id }}_3">No</a>
-                                                                                                 </div>
-                                                                                            {% endif %}
-                                                                                         {% elif question_template_obj.Question == "EWS Status (To be filled by HR – Red/ Amber/ Green)" %}
-                                                                                             {% with employee_obj|review_ews_status as ews_color_status %}
+                                                                                       <input type="text" name="remark_{{ question_template_obj.id }}" class="form-control" placeholder="Remarks" {% if check_data.0 == "question_exists" and check_data.2 %} value="{{ check_data.2 }}"{% endif %}>
+                                                                                   {% else %}
 
-                                                                                                 <input type="hidden" name="category_question_ans_checkbox_{{ question_template_obj.id }}" id="category_question_ans_checkbox_{{ question_template_obj.id }}" value="{{ ews_color_status }}">
-                                                                                                 <div class="tri-state-toggle">
-                                                                                                     <a class="tri-state-toggle-button {% if ews_color_status == 'Red' %}red_active{% endif %}" data-value="Red" data-id="category_question_ans_checkbox_{{ question_template_obj.id }}" data-name="toggle-button_{{ question_template_obj.id }}" id="toggle-button_{{ question_template_obj.id }}_1">Red</a>
-                                                                                                     <a class="tri-state-toggle-button {% if ews_color_status == 'Amber' %}amber_active{% endif %}" data-value="Amber" data-id="category_question_ans_checkbox_{{ question_template_obj.id }}" data-name="toggle-button_{{ question_template_obj.id }}" id="toggle-button_{{ question_template_obj.id }}_2">Amber</a>
-                                                                                                     <a class="tri-state-toggle-button {% if ews_color_status == 'Green' %}green_active{% endif %}" data-value="Green" data-id="category_question_ans_checkbox_{{ question_template_obj.id }}" data-name="toggle-button_{{ question_template_obj.id }}" id="toggle-button_{{ question_template_obj.id }}_3">Green</a>
-                                                                                                 </div>
-                                                                                             {% endwith %}
-                                                                                         {% else %}
-                                                                                            <input type="hidden" name="category_question_ans_checkbox_{{ question_template_obj.id }}" id="category_question_ans_checkbox_{{ question_template_obj.id }}" value="N/A">
-                                                                                            <div class="tri-state-toggle">
-                                                                                                 <a class="tri-state-toggle-button"  data-value="Yes" data-id="category_question_ans_checkbox_{{ question_template_obj.id }}" data-name="toggle-button_{{ question_template_obj.id }}" id="toggle-button_{{ question_template_obj.id }}_1">Yes</a>
-                                                                                                 <a class="tri-state-toggle-button active"  data-value="N/A" data-id="category_question_ans_checkbox_{{ question_template_obj.id }}" data-name="toggle-button_{{ question_template_obj.id }}" id="toggle-button_{{ question_template_obj.id }}_2">N/A</a>
-                                                                                                 <a class="tri-state-toggle-button" data-value="No" data-id="category_question_ans_checkbox_{{ question_template_obj.id }}" data-name="toggle-button_{{ question_template_obj.id }}" id="toggle-button_{{ question_template_obj.id }}_3">No</a>
-                                                                                            </div>
-                                                                                         {% endif %}
-                                                                                     {% endif %}
-                                                                                 </td>
-                                                                                 <td>
-                                                                                    <input type="text" required name="remark_{{ question_template_obj.id }}" class="form-control" placeholder="Remarks" {% if check_data.0 == "question_exists" and check_data.2 %} value="{{ check_data.2 }}"{% endif %}>
-<!--                                                                                    <textarea name="remark_{{ question_template_obj.id }}" class="form-control" placeholder="Remarks">{% if check_data.0 == "question_exists" and check_data.2 %}{{ check_data.2 }}{% endif %}</textarea>-->
-                                                                                 </td>
+                                                                                       <input type="text" name="remark_{{ question_template_obj.id }}" class="form-control remark-disabled" placeholder="—" value="{% if check_data.0 == 'question_exists' and check_data.2 %}{{ check_data.2 }}{% endif %}" disabled>
+                                                                                   {% endif %}
+                                                                                   {# ============================================================= #}
+                                                                                </td>
                                                                               </tr>
                                                                          {% endwith %}
                                                                         {% endfor %}
@@ -466,11 +412,6 @@
                                             <div class="col-xl-12 col-md-12">
                                                 <center>
                                                     <!-- {% url 'review:employee_final_submit' %} -->
-<!--                                                     <form action="#" method="post">-->
-<!--                                                        {% csrf_token %}-->
-<!--                                                        <input type="hidden" tabindex="1" id="employee_id" name="employee_id"  value="{{ employee_obj.id }}" style="width: 600px" required/>-->
-<!--                                                    <button id="modal_open_button" class="custom_button_link" name="search" style="width: 300px">Submit</button>-->
-<!--                                                     </form>-->
                                                 </center>
                                             </div>
                                         {% endif %}
@@ -501,7 +442,7 @@
                                                                                     <tr>
                                                                                         <td>{% if emp_last_data_check.0 == "question_exists" %} {{ question_template_obj.Question }} {% endif %}</td>
                                                                                         <td>{% if emp_last_data_check.0 == "question_exists" %} {{ emp_last_data_check.1 }} {% endif %}</td>
-                                                                                         <td>{% if emp_last_data_check.0 == "question_exists" %} {{ emp_last_data_check.2 }} {% endif %}</td>
+                                                                                         <td>{% if emp_last_data_check.0 == "question_exists" %} {{ emp_last_data_check.2 }} {% endif %} </td>
                                                                                     </tr>
                                                                                 {% endwith %}
                                                                          {% endfor %}
@@ -536,10 +477,8 @@
          </div>
 
          <div class="footer">
-            <span> Powered By A-Tech </span>
+            <span> Powered By GCC </span>
          </div>
-             <!-- Trigger/Open The Modal -->
-<!--<button id="myBtn">Open Modal</button>-->
 
 <!-- The Modal -->
  <div id="myModal" class="modal">
