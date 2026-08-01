@@ -67,7 +67,7 @@
 <!--                                                   <th>Id</th>-->
                                                    <th>Name</th>
                                                    <th>Employee No</th>
-                                                   <th>Employee Progress</th>
+<!--                                                   <th>Employee Progress</th>-->
                                                    <th>Action</th>
                                                </tr>
                                            </thead>
@@ -77,18 +77,18 @@
 <!--                                                   <td>{{ employee_obj.id }}</a></td>-->
                                                    <td><a href="{% url 'review:employee_review_detail_view' employee_obj.id %}">{{ employee_obj.EmployeeName }}</a></td>
                                                    <td>{{ employee_obj.EmployeeNumber }}</td>
-                                                   <td>
-                                                       {% if employee_obj.get_employee_review_draft_exists %}
-                                                       <div class="w3-light-grey w3-round-xlarge">
-                                                           <div class="w3-container w3-blue w3-round-xlarge"
-                                                                style="width:{{ employee_obj.get_employee_progress }}%;background-color: #4d77a8!important;">
-                                                               {{ employee_obj.get_employee_progress }}%
-                                                           </div>
-                                                       </div>
-                                                       {% else %}
-                                                        -
-                                                       {% endif %}
-                                                   </td>
+<!--                                                   <td>-->
+<!--                                                       {% if employee_obj.get_employee_review_draft_exists %}-->
+<!--                                                       <div class="w3-light-grey w3-round-xlarge">-->
+<!--                                                           <div class="w3-container w3-blue w3-round-xlarge"-->
+<!--                                                                style="width:{{ employee_obj.get_employee_progress }}%;background-color: #4d77a8!important;">-->
+<!--                                                               {{ employee_obj.get_employee_progress }}%-->
+<!--                                                           </div>-->
+<!--                                                       </div>-->
+<!--                                                       {% else %}-->
+<!--                                                        - -->
+<!--                                                       {% endif %}-->
+<!--                                                   </td>-->
                                                    <td><a class="custom_button_link" href="{% url 'review:employee_edit_view' employee_obj.id %}">Edit <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
                                                </tr>
                                            {% endfor %}
@@ -112,7 +112,7 @@
            </div>
         </div>
         <div class="footer">
-            <span> Powered By A-Tech </span>
+            <span> Powered By GCC </span>
         </div>
      {% endblock body %}
   </div>

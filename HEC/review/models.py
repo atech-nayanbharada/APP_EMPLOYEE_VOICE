@@ -44,7 +44,7 @@ class CategoryQuestion(TimeStampedModel,ActivatorModel):
     # NEW fields
     WidgetType = models.CharField(max_length=20, choices=WIDGET_TYPE_LIST, default=TRI_YES)
     Options = models.CharField(max_length=500, blank=True, null=True,help_text="Comma-separated. Only used when WidgetType = Dropdown. e.g. Excellent,Good,Average,Poor")
-
+    RemarkEnabled = models.BooleanField(default=True,help_text="Uncheck to disable/grey-out the Remarks box for this question.")
     # QUESTION_TYPE = models.CharField(max_length=10, choices=QUESTION_TYPE_LIST, null=True, blank=True)
 
     def __str__(self):
