@@ -20,7 +20,7 @@ from dateutil.relativedelta import relativedelta
 from django.template.loader import render_to_string
 import pythoncom
 
-from utils.common_utils import clean_date
+from utils.common_utils import clean_date, send_email_notification
 
 pythoncom.CoInitialize()
 
@@ -448,6 +448,18 @@ class EmployeeFinalSubmit(LoginRequiredMixin, View):
             mail.Subject = f"HR connect with {review_obj.Employee.EmployeeName}"
             mail.HTMLBody = html_text
             mail.Send()
+
+            employee_template_name = self.template_name
+            mail_to = self.request.user.email
+            subject = f"HR connect with {review_obj.Employee.EmployeeName}"
+            # mail_to = "bharadanayan.vijaybhai@adani.com"
+            # cc_email = admin_obj.email
+            cc_email = "bharadanayan.vijaybhai@adani.com"
+            # data = {
+            #     'manager_name': manager_user.full_name,
+            #     'host_url': PRODUCTION_HOST_URL,
+            # }
+            send_email_notification(data, employee_template_name, subject, mail_to, cc_email)
 
         else:
             messages.error(request, "Please fill up the all data.")

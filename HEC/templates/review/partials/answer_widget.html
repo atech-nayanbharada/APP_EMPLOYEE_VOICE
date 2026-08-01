@@ -1,0 +1,99 @@
+{# review/partials/answer_widget.html #}
+{# Renders the correct answer input based on question_template_obj.WidgetType #}
+{# Expects in context: question_template_obj , saved_value #}
+
+{# ===== 1. TRI-STATE : Yes / N/A / No ===== #}
+{% if question_template_obj.WidgetType == "tri_yes" %}
+    <input type="hidden"
+           name="category_question_ans_checkbox_{{ question_template_obj.id }}"
+           id="category_question_ans_checkbox_{{ question_template_obj.id }}"
+           value="{% if saved_value %}{{ saved_value }}{% else %}N/A{% endif %}">
+    <div class="tri-state-toggle">
+        <a class="tri-state-toggle-button {% if saved_value == 'Yes' %}active{% endif %}"
+           data-value="Yes" data-id="category_question_ans_checkbox_{{ question_template_obj.id }}"
+           data-name="toggle-button_{{ question_template_obj.id }}"
+           id="toggle-button_{{ question_template_obj.id }}_1">Yes</a>
+        <a class="tri-state-toggle-button {% if saved_value == 'N/A' or not saved_value %}active{% endif %}"
+           data-value="N/A" data-id="category_question_ans_checkbox_{{ question_template_obj.id }}"
+           data-name="toggle-button_{{ question_template_obj.id }}"
+           id="toggle-button_{{ question_template_obj.id }}_2">N/A</a>
+        <a class="tri-state-toggle-button {% if saved_value == 'No' %}active{% endif %}"
+           data-value="No" data-id="category_question_ans_checkbox_{{ question_template_obj.id }}"
+           data-name="toggle-button_{{ question_template_obj.id }}"
+           id="toggle-button_{{ question_template_obj.id }}_3">No</a>
+    </div>
+
+{# ===== 2. TRI-STATE : Red / Amber / Green ===== #}
+{% elif question_template_obj.WidgetType == "tri_rag" %}
+    <input type="hidden"
+           name="category_question_ans_checkbox_{{ question_template_obj.id }}"
+           id="category_question_ans_checkbox_{{ question_template_obj.id }}"
+           value="{{ saved_value }}">
+    <div class="tri-state-toggle">
+        <a class="tri-state-toggle-button {% if saved_value == 'Red' %}red_active{% endif %}"
+           data-value="Red" data-id="category_question_ans_checkbox_{{ question_template_obj.id }}"
+           data-name="toggle-button_{{ question_template_obj.id }}"
+           id="toggle-button_{{ question_template_obj.id }}_1">Red</a>
+        <a class="tri-state-toggle-button {% if saved_value == 'Amber' %}amber_active{% endif %}"
+           data-value="Amber" data-id="category_question_ans_checkbox_{{ question_template_obj.id }}"
+           data-name="toggle-button_{{ question_template_obj.id }}"
+           id="toggle-button_{{ question_template_obj.id }}_2">Amber</a>
+        <a class="tri-state-toggle-button {% if saved_value == 'Green' %}green_active{% endif %}"
+           data-value="Green" data-id="category_question_ans_checkbox_{{ question_template_obj.id }}"
+           data-name="toggle-button_{{ question_template_obj.id }}"
+           id="toggle-button_{{ question_template_obj.id }}_3">Green</a>
+    </div>
+
+{# ===== 3. DROPDOWN ===== #}
+{% elif question_template_obj.WidgetType == "dropdown" %}
+    <select class="form-control"
+            name="category_question_ans_checkbox_{{ question_template_obj.id }}"
+            id="category_question_ans_checkbox_{{ question_template_obj.id }}" required>
+        <option value="">-- Select --</option>
+        {% for opt in question_template_obj.get_options_list %}
+            <option value="{{ opt }}" {% if saved_value == opt %}selected{% endif %}>{{ opt }}</option>
+        {% endfor %}
+    </select>
+
+{# ===== 4. TEXT BOX ===== #}
+{% elif question_template_obj.WidgetType == "textbox" %}
+    <input type="text" class="form-control"
+           name="category_question_ans_checkbox_{{ question_template_obj.id }}"
+           id="category_question_ans_checkbox_{{ question_template_obj.id }}"
+           value="{{ saved_value }}" placeholder="Enter answer" required>
+
+{# ===== 5. TEXT AREA ===== #}
+{% elif question_template_obj.WidgetType == "textarea" %}
+    <textarea class="form-control"
+              name="category_question_ans_checkbox_{{ question_template_obj.id }}"
+              id="category_question_ans_checkbox_{{ question_template_obj.id }}"
+              placeholder="Enter answer" required>{{ saved_value }}</textarea>
+
+{# ===== 6. DATE PICKER ===== #}
+{% elif question_template_obj.WidgetType == "date" %}
+    <input type="date" class="form-control"
+           name="category_question_ans_checkbox_{{ question_template_obj.id }}"
+           id="category_question_ans_checkbox_{{ question_template_obj.id }}"
+           value="{{ saved_value|date:'Y-m-d' }}" required>
+
+{# ===== FALLBACK (unknown / not set) -> default Yes/N/A/No toggle ===== #}
+{% else %}
+    <input type="hidden"
+           name="category_question_ans_checkbox_{{ question_template_obj.id }}"
+           id="category_question_ans_checkbox_{{ question_template_obj.id }}"
+           value="{% if saved_value %}{{ saved_value }}{% else %}N/A{% endif %}">
+    <div class="tri-state-toggle">
+        <a class="tri-state-toggle-button {% if saved_value == 'Yes' %}active{% endif %}"
+           data-value="Yes" data-id="category_question_ans_checkbox_{{ question_template_obj.id }}"
+           data-name="toggle-button_{{ question_template_obj.id }}"
+           id="toggle-button_{{ question_template_obj.id }}_1">Yes</a>
+        <a class="tri-state-toggle-button {% if saved_value == 'N/A' %}active{% endif %}"
+           data-value="N/A" data-id="category_question_ans_checkbox_{{ question_template_obj.id }}"
+           data-name="toggle-button_{{ question_template_obj.id }}"
+           id="toggle-button_{{ question_template_obj.id }}_2">N/A</a>
+        <a class="tri-state-toggle-button {% if saved_value == 'No' %}active{% endif %}"
+           data-value="No" data-id="category_question_ans_checkbox_{{ question_template_obj.id }}"
+           data-name="toggle-button_{{ question_template_obj.id }}"
+           id="toggle-button_{{ question_template_obj.id }}_3">No</a>
+    </div>
+{% endif %}
